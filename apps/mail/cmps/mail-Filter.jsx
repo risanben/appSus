@@ -53,6 +53,14 @@ export class MailFilter extends React.Component {
                     onClick={this.handleChange}
                 > Inbox</button>
 
+                <label htmlFor="by-sent"></label>
+                <button
+                    id="by-sent"
+                    name="status"
+                    value={'sent'}
+                    onClick={this.handleChange}
+                > Inbox</button>
+
             </form>
 
 
