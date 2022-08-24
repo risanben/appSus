@@ -1,0 +1,53 @@
+header {
+    background: var(--main-bg-color);
+    border-bottom: 2px solid white;
+}
+
+.app-header {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+nav a {
+    margin: .5em;
+}
+
+nav a:active {
+    color: purple;
+}
+
+nav a.active {
+    color: darkblue;
+    font-weight: bold;
+    text-decoration: overline;
+}
+
+.item{
+    font-family: lato-bold;
+    font-size: 30px;
+}
+
+.logo.item1{
+color: rgb(24, 115, 234);
+}
+
+.logo.item2{
+color: rgb(196, 27, 21);
+}
+
+.logo.item3{
+color: rgb(215, 162, 26);
+}
+
+.logo.item4{
+color: rgb(24, 115, 234);
+}
+
+.logo.item5{
+color: rgb(20, 122, 11);
+}
+
+.logo.item6{
+color: rgb(196, 27, 21);
+}
