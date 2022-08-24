@@ -1,3 +1,5 @@
 .note-app{
    margin-top: var(--apps-margin-top);
+   display: flex;
+   font-family: lato;
 }

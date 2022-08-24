@@ -1,5 +1,7 @@
 
 .note-list {
-    max-width: 95%;
     columns: 240px auto;
+    /* border: 3px solid red; */
+flex-grow: 1;
 }
+

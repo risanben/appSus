@@ -15,4 +15,9 @@
 }
 .note-vid{
     border-radius: 0.8rem;
+
+}
+
+.note-btns-container button img{
+    width: 10px;
 }
