@@ -7,6 +7,7 @@ import { mailService } from '../services/mail.service.js'
 export class MailApp extends React.Component {
     state = {
         mails: [],
+        filterBy: null,
     }
 
     componentDidMount() {
@@ -15,17 +16,20 @@ export class MailApp extends React.Component {
     }
 
     loadMails = () => {
-        mailService.query()
+        mailService.query(this.state.filterBy)
             .then(mails => this.setState({ mails }))
     }
 
+    onSetFilter = (filterBy) => {
+        this.setState({ filterBy }, this.loadMails)
+    }
 
     render() {
         const { mails } = this.state
         return <div className="mail-app">
-            <MailFilter />
+            <MailFilter onSetFilter={this.onSetFilter} />
             <h1>hello from MailApp</h1>
-            <MailList  mails={mails}/>
+            <MailList mails={mails} />
             <MailEdit />
         </div>
     }

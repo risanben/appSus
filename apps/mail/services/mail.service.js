@@ -7,51 +7,6 @@ export const mailService = {
 
 }
 
-const KEY = 'mailsDB'
-
-function query(/*filterBy*/) {
-    console.log('mailService-query');
-    let mails = _loadFromStorage()
-    console.log('mails', mails);
-    if (!mails) {
-        mails = _createMails()
-        _saveToStorage(mails)
-    }
-
-    // if (filterBy) {
-    //     let { vendor, minSpeed, maxSpeed } = filterBy
-    //     if (!minSpeed) minSpeed = 0;
-    //     if (!maxSpeed) maxSpeed = Infinity
-    //     cars = cars.filter(car => (
-    //         car.vendor.includes(vendor) &&
-    //         car.speed >= minSpeed &&
-    //         car.speed <= maxSpeed
-    //     ))
-    // }
-    console.log('mails', mails);
-    return Promise.resolve(mails)
-}
-
-function _createMail() {
-    return {
-        id: utilService.makeId(),
-        subject: utilService.makeLorem(3),
-        body: utilService.makeLorem(50),
-        isRead: false,
-        sentAt: utilService.getRandomIntInclusive(13),
-        to: `${utilService.makeLorem(1)}${utilService.makeLorem(1)}.com`
-    }
-}
-
-function _createMails() {
-    console.log('_createMails');
-    const mails = []
-    for (let i = 0; i < 20; i++) {
-        mails.push(_createMail())
-    }
-    return mails
-}
-
 // const mail = {
 //     id: 'e101',
 //     subject: 'Miss you!',
@@ -59,7 +14,71 @@ function _createMails() {
 //     isRead: false,
 //     sentAt : 1551133930594,
 //     to: 'momo@momo.com'
+//  status: 'inbox/sent/trash/draft'
 // }
+
+const loggedinUser = {
+    email: 'user@appsus.com',
+    fullname: 'Mahatma Appsus'
+}
+
+const criteria = {
+    status: 'inbox/sent/trash/draft',
+    txt: 'puki', // no need to support complex text search 
+    isRead: true, // (optional property, if missing: show all) 
+    isStared: true, // (optional property, if missing: show all) 
+    lables: ['important', 'romantic'] // has any of the labels 
+}
+
+
+const KEY = 'mailsDB'
+
+function query(filterBy) {
+    console.log('mailService-query-filterBy', filterBy);
+
+    let mails = _loadFromStorage()
+    console.log('mails', mails);
+    if (!mails) {
+        mails = _createMails()
+        _saveToStorage(mails)
+    }
+
+    if (filterBy) {
+        let { subject, status } = filterBy
+        console.log('query-filterBy status', status);
+        mails = mails.filter(mail => (
+            (mail.subject.includes(subject) ||
+                mail.body.includes(subject)) &&
+            mail.status === status
+        ))
+    }
+    console.log('mails', mails);
+    return Promise.resolve(mails)
+}
+
+function _createMail() {
+    const rand = Math.random() >= 0.5 ? 1 : 0
+    return {
+        id: utilService.makeId(),
+        subject: utilService.makeLorem(3),
+        body: utilService.makeLorem(50),
+        isRead: false,
+        sentAt: utilService.getRandomIntInclusive(13),
+        to: rand === 1 ?
+            'user@appsus.com'
+            : `${utilService.makeLorem(1)}@${utilService.makeLorem(1)}.com`,
+        status: rand === 1 ? 'inbox' : 'sent'
+    }
+}
+
+function _createMails() {
+    console.log('_createMails');
+    const mails = []
+    for (let i = 0; i < 50; i++) {
+        mails.push(_createMail())
+    }
+    return mails
+}
 
 function getById(mailId) {
     console.log('getById-mailId', mailId);
