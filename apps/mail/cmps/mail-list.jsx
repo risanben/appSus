@@ -1,13 +1,13 @@
-import {MailPreview} from '../cmps/mail-preview.jsx'
+import { MailPreview } from '../cmps/mail-preview.jsx'
+import { mailService } from '../services/mail.service.js'
 
-export class MailList extends React.Component {
+export function MailList({ mails }) {
 
+  return <section className="mail-list">
+    hello from mail-list
+    {mails.map(mail => <MailPreview
+      key={mail.id}
+      mail={mail} />)}
+  </section>
 
- render (){
-
-    return <div className="mail-list">
-      hello from mail-list
-      <MailPreview />
-      </div>
- }
 }

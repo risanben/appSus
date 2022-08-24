@@ -1,0 +1,3 @@
+.mail-preview > * {
+    background-color: var(--unread-bg-color);
+}
