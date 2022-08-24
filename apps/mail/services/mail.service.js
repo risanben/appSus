@@ -14,7 +14,8 @@ export const mailService = {
 //     isRead: false,
 //     sentAt : 1551133930594,
 //     to: 'momo@momo.com'
-//  status: 'inbox/sent/trash/draft'
+//     status: 'inbox/sent/trash/draft'
+// 
 // }
 
 const loggedinUser = {
@@ -37,22 +38,36 @@ function query(filterBy) {
     console.log('mailService-query-filterBy', filterBy);
 
     let mails = _loadFromStorage()
-    console.log('mails', mails);
     if (!mails) {
         mails = _createMails()
         _saveToStorage(mails)
     }
 
+    // if (filterBy) {
+    //     let { subject, status } = filterBy
+    //     console.log('query-filterBy status', status);
+    //     mails = mails.filter(mail => (
+    //         (mail.subject.includes(subject) ||
+    //             mail.body.includes(subject))
+    //         // mail.status === status
+    //     ))
+    // }/*-------------------------------------------*/
     if (filterBy) {
-        let { subject, status } = filterBy
-        console.log('query-filterBy status', status);
+        let { subject, status, isRead } = filterBy
+
+        console.log('query-filterBy isRead', isRead);
+        mails = mails.filter(mail => (
+            mail.status === status &&
+            mail.isRead === isRead
+        ))
         mails = mails.filter(mail => (
             (mail.subject.includes(subject) ||
-                mail.body.includes(subject)) &&
-            mail.status === status
+                mail.body.includes(subject))
         ))
+
     }
-    console.log('mails', mails);
+    // }/*-------------------------------------------*/
+
     return Promise.resolve(mails)
 }
 
@@ -67,12 +82,14 @@ function _createMail() {
         to: rand === 1 ?
             'user@appsus.com'
             : `${utilService.makeLorem(1)}@${utilService.makeLorem(1)}.com`,
+        from: rand === 1 ?
+            `${utilService.makeLorem(1)}@${utilService.makeLorem(1)}.com`
+            : 'user@appsus.com',
         status: rand === 1 ? 'inbox' : 'sent'
     }
 }
 
 function _createMails() {
-    console.log('_createMails');
     const mails = []
     for (let i = 0; i < 50; i++) {
         mails.push(_createMail())
@@ -81,11 +98,9 @@ function _createMails() {
 }
 
 function getById(mailId) {
-    console.log('getById-mailId', mailId);
     if (!mailId) return Promise.resolve(null)
     const mails = _loadFromStorage()
     const mail = mails.find(mail => mailId === mail.id)
-    console.log('getById-mail', mail);
     return Promise.resolve(mail)
 }
 

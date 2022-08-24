@@ -1,3 +1,11 @@
-.mail-app{
-    background-color: antiquewhite;
+.mail-app {
+    background-color: rgb(221, 238, 247);
+    display: grid;
+    grid-template-columns: 1fr 10fr;
+    grid-template-rows: 1fr 25fr;
+}
+
+.mail-header {
+    grid-column: 1/-1;
+    display: flex;
 }

@@ -1,0 +1,8 @@
+.mail-filter {
+    display: flex;
+    flex-direction: column;
+}
+
+.mail-filter button {
+    display: block;
+}

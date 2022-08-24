@@ -5,6 +5,7 @@ export class MailFilter extends React.Component {
         filterBy: {
             subject: '',
             status: '',
+            isRead: false,
         },
     }
 
@@ -14,8 +15,17 @@ export class MailFilter extends React.Component {
 
     handleChange = ({ target }) => {
         const field = target.name
-        const value = target.type === 'number' ? +target.value : target.value
-        console.log('handleChange- field, value', field, value);
+        let value = ''
+        console.log('target', target);
+        // const value = target.name === 'isRead' ? +(target.value) : target.value
+        // const value = target.value
+        if (field === 'isRead') {
+            value = target.value === 'true' ? false : true
+        } else {
+            value = target.value
+        }
+        console.log('handleChange-target.field, target.value', field, value);
+
         this.setState((prevState) => ({
             filterBy: {
                 ...prevState.filterBy,
@@ -32,7 +42,7 @@ export class MailFilter extends React.Component {
     }
 
     render() {
-        const { subject, status } = this.state.filterBy
+        const { subject, status, isRead } = this.state.filterBy
         return <section className="mail-filter">
             <form onSubmit={this.onFilter}>
                 <label htmlFor="by-subject">mail search:</label>
@@ -59,7 +69,31 @@ export class MailFilter extends React.Component {
                     name="status"
                     value={'sent'}
                     onClick={this.handleChange}
-                > Inbox</button>
+                > Sent</button>
+
+                <label htmlFor="by-trash"></label>
+                <button
+                    id="by-trash"
+                    name="status"
+                    value={'trash'}
+                    onClick={this.handleChange}
+                > trash</button>
+
+                <label htmlFor="by-draft"></label>
+                <button
+                    id="by-draft"
+                    name="status"
+                    value={'draft'}
+                    onClick={this.handleChange}
+                > draft</button>
+
+                <label htmlFor="by-UnRead"></label>
+                <button
+                    id="by-UnRead"
+                    name="isRead"
+                    value={isRead}
+                    onClick={this.handleChange}
+                > UnRead</button>
 
             </form>
 

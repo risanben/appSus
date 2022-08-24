@@ -1,6 +1,7 @@
 
 import { MailList } from '../cmps/mail-list.jsx'
 import { MailFilter } from "../cmps/mail-Filter.jsx"
+import { MailHeader } from "../cmps/mail-header.jsx"
 import { MailEdit } from "./mail-edit.jsx"
 import { mailService } from '../services/mail.service.js'
 
@@ -27,8 +28,8 @@ export class MailApp extends React.Component {
     render() {
         const { mails } = this.state
         return <div className="mail-app">
+            <MailHeader />
             <MailFilter onSetFilter={this.onSetFilter} />
-            <h1>hello from MailApp</h1>
             <MailList mails={mails} />
             <MailEdit />
         </div>
