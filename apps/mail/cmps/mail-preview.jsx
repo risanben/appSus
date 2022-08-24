@@ -1,8 +1,10 @@
+const {Link} = ReactRouterDOM
 
-export function MailPreview(){
+export function MailPreview({mail}){
 
-
-    return <div>
-        hello from mail preview
-    </div>
+    return  <Link to={"/mail/" + mail.id}>
+    <article className="mail-preview">
+        <span>{mail.subject}</span>
+    </article>
+    </Link>
 }
