@@ -1,3 +1,5 @@
-.note-list{
-    background-color: aliceblue;
+
+.note-list {
+    max-width: 95%;
+    columns: 240px auto;
 }

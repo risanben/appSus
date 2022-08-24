@@ -1,5 +1,6 @@
 body {
     margin: 0;
+    background-color: var(--main-bg-color)
 }
 
 h1,
@@ -22,4 +23,9 @@ img {
     object-fit: cover;
 }
 
+video{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
 
