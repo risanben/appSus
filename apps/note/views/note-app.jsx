@@ -18,17 +18,21 @@ export class NoteApp extends React.Component {
   }
 
   loadNotes() {
-    NoteService.query()
+    const { filterBy} = this.state
+    NoteService.query(filterBy)
         .then(notes => this.setState({ notes }))
 
 }
 
+onFilterChange = (filterBy) => {
+  this.setState({ filterBy }, this.loadNotes)
+}
 
   render() {
     const { notes} = this.state
 
     return <section className="note-app">
-      {/* <NoteFilter /> */}
+      <NoteFilter onFilterChange={this.onFilterChange}/>
       <NoteList notes={notes} />
       {/* <NoteEdit /> */}
     </section>

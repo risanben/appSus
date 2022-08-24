@@ -7,13 +7,15 @@ export const NoteService = {
 
 const NOTES_KEY = 'noteDB'
 
-function query() {
+function query(filterBy) {
     let notes = storageService.loadFromStorage(NOTES_KEY)
     if (!notes || !notes.length) {
         notes = gNotes
         storageService.saveToStorage(NOTES_KEY, notes)
     }
-
+    if (filterBy) {
+        notes = notes.filter(note => note.type === filterBy)
+    }
     return Promise.resolve(notes)
 }
 
