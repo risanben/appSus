@@ -15,11 +15,11 @@ export class NotePreview extends React.Component {
 
     render() {
         const { note } = this.props
-        console.log('note.details.txt:', note.details.txt)
 
-        return <section className="note-preview">
+        return <section className="note-preview" style={{backgroundColor: note.details.color}}>
             {(note.type === 'text'|| note.type === 'todo') && <div>{`${note.details.txt}`}</div>}
-            {note.type === 'image' && <img src={note.details.txt}/>}
+            {note.type === 'image' && <img className="note-img"src={note.details.txt}/>}
+            {note.type === 'video' &&<video className="note-vid"src={note.details.txt} controls autoPlay></video>}
         </section>
     }
 
