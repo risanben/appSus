@@ -4,6 +4,9 @@ import { storageService } from '../../../services/storage.service.js'
 export const mailService = {
     query,
     getById,
+    save,
+    remove,
+    update,
 
 }
 
@@ -14,8 +17,9 @@ export const mailService = {
 //     isRead: false,
 //     sentAt : 1551133930594,
 //     to: 'momo@momo.com'
+//     from:.....
 //     status: 'inbox/sent/trash/draft'
-// 
+//
 // }
 
 const loggedinUser = {
@@ -53,9 +57,13 @@ function query(filterBy) {
     //     ))
     // }/*-------------------------------------------*/
     if (filterBy) {
-        let { subject, status, isRead } = filterBy
+        let { subject, status, isRead, isStared } = filterBy
 
-        console.log('query-filterBy isRead', isRead);
+        console.log('query-filterBy isStared', isStared);
+        console.log('mails', mails);
+        // mails = mails.filter(mail => (
+        //     mail.isStared === isStared
+        // ))
         mails = mails.filter(mail => (
             mail.status === status &&
             mail.isRead === isRead
@@ -71,22 +79,54 @@ function query(filterBy) {
     return Promise.resolve(mails)
 }
 
-function _createMail() {
-    const rand = Math.random() >= 0.5 ? 1 : 0
+function remove(mailId) {
+    let mails = _loadFromStorage()
+    mails = mails.filter(mail => mail.id !== mailId)
+    _saveToStorage(mails)
+    return Promise.resolve()
+}
+
+function save(mail) {
+    if (mail.id) return update(mail)
+    else return _add(mail)
+}
+
+function _add({ subject, body, date = new Date(), to }) {
+    let mails = _loadFromStorage()
+    const mail = _createMail(subject, body, date, to, 'user@appsus.com')
+    mails = [mail, ...mails]
+    _saveToStorage(mails)
+    return Promise.resolve(mail)
+}
+
+function update(mailToUpdate) {
+    let mails = _loadFromStorage()
+    mails = mails.map(mail => mail.id === mailToUpdate.id ? mailToUpdate : mail)
+
+    console.log('service update-mails', mails);
+    console.log('service update-mailToUpdate', mailToUpdate);
+    _saveToStorage(mails)
+    return Promise.resolve(mailToUpdate)
+}
+
+function _createMail(subject = utilService.makeLorem(3), body = utilService.makeLorem(50), date = utilService.getRandomIntInclusive(13), to = getMailAdders(), from = getMailAdders()) {
+
     return {
         id: utilService.makeId(),
-        subject: utilService.makeLorem(3),
-        body: utilService.makeLorem(50),
+        subject,
+        body,
         isRead: false,
-        sentAt: utilService.getRandomIntInclusive(13),
-        to: rand === 1 ?
-            'user@appsus.com'
-            : `${utilService.makeLorem(1)}@${utilService.makeLorem(1)}.com`,
-        from: rand === 1 ?
-            `${utilService.makeLorem(1)}@${utilService.makeLorem(1)}.com`
-            : 'user@appsus.com',
-        status: rand === 1 ? 'inbox' : 'sent'
+        sentAt: date,
+        to,
+        from,
+        status: from === 'user@appsus.com' ? 'sent' : 'inbox'
     }
+}
+
+function getMailAdders() {
+    const rand = Math.random() >= 0.5 ?
+        'user@appsus.com'
+        : `${utilService.makeLorem(1)}@${utilService.makeLorem(1)}.com`
 }
 
 function _createMails() {

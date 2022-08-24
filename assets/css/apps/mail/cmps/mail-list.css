@@ -1,4 +1,20 @@
-.mail-list{
-  /* display: grid;
+.mail-list {
+    /* display: grid;
   grid-template-columns: 1fr 8fr; */
+}
+
+.mail-list .read {
+    background-color: var(--read-bg-color);
+}
+
+.mail-list .unread {
+    background-color: var(--unread-bg-color);
+}
+
+.mail-list .Stared {
+    color: gold;
+}
+
+.mail-list .unStared {
+    color: black;
 }
