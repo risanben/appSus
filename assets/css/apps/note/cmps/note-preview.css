@@ -1,0 +1,7 @@
+.note-preview {
+    padding: 15px;
+    border: 1px solid var(--selected-filter-bg-color);
+    border-radius: 0.8rem;
+    width: 250px;
+    margin-bottom: 20px;
+}

@@ -1,6 +1,11 @@
-export function noteList() {
+import { NotePreview } from './note-preview.jsx'
 
-    return <div className="note-list">
-        hello from mail filter
-    </div>
+export function NoteList({ notes }) {
+    
+
+    return <React.Fragment>
+        {notes && <section className="note-list">
+                {notes.map(note=><NotePreview key={note.id} note={note}/>)}
+                </section>}
+    </React.Fragment>
 }

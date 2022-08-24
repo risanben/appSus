@@ -1,6 +1,7 @@
 :root {
     --main-bg-color: rgb(244, 248, 250);
     --read-bg-color:rgb(235, 242, 246);
-    --selectef-filter-bg-color: rgb(200, 226, 241);
+    --selected-filter-bg-color: rgb(200, 226, 241);
+    --apps-margin-top: 40px;
 }
 
