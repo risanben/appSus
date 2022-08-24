@@ -3,6 +3,9 @@ import { utilService } from "../../../services/util.service.js"
 
 export const NoteService = {
     query,
+    removeNote,
+    changeColor,
+    addNote
 }
 
 const NOTES_KEY = 'noteDB'
@@ -19,8 +22,46 @@ function query(filterBy) {
     return Promise.resolve(notes)
 }
 
+function removeNote(noteId) {
+    const notes = storageService.loadFromStorage(NOTES_KEY)
+    const noteIdx = _getNoteIdx(noteId)
+    notes.splice(noteIdx, 1)
+    storageService.saveToStorage(NOTES_KEY, notes)
+    return Promise.resolve()
 
+}
 
+function addNote(txt, type) {
+    let notes = storageService.loadFromStorage(NOTES_KEY)
+
+    const newNote = {
+        id: utilService.makeId(),
+        type,
+        details: {
+            txt,
+            color: 'white'
+        }
+    }
+
+    notes.unshift(newNote)
+    storageService.saveToStorage(NOTES_KEY, notes)
+
+    return Promise.resolve()
+}
+
+function _getNoteIdx(noteId) {
+    const notes = storageService.loadFromStorage(NOTES_KEY)
+    const noteIdx = notes.findIndex(note => noteId === note.id)
+    return noteIdx
+}
+
+function changeColor(noteId, color) {
+    const notes = storageService.loadFromStorage(NOTES_KEY)
+    const noteIdx = _getNoteIdx(noteId)
+    notes[noteIdx].details.color = color
+    storageService.saveToStorage(NOTES_KEY, notes)
+    return Promise.resolve()
+}
 
 const gNotes = [
     {

@@ -1,7 +1,6 @@
 
 .note-list {
-    columns: 240px auto;
+    columns: 255px auto;
     /* border: 3px solid red; */
-flex-grow: 1;
 }
 

@@ -2,8 +2,11 @@
     padding: 15px;
     border: 1px solid var(--selected-filter-bg-color);
     border-radius: 0.8rem;
-    width: 250px;
     margin-bottom: 20px;
+    display: inline-flex;
+    flex-direction: column;
+    /* border: 2px solid green; */
+
 }
 
 .note-preview:hover {
@@ -20,4 +23,16 @@
 
 .note-btns-container button img{
     width: 10px;
+}
+.note-btns-container img{
+    width: 20px;
+}
+
+.note-btns-container{
+    padding-top: 10px;
+ opacity: 0;
+ transition: opacity 0.3s;
+}
+.note-preview:hover .note-btns-container{
+    opacity: 1;
 }

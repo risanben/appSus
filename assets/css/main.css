@@ -30,3 +30,4 @@
 @import './apps/note/views/note-app.css';
 @import './apps/note/cmps/note-list.css';
 @import './apps/note/cmps/note-filter.css';
+@import './apps/note/cmps/note-add.css';

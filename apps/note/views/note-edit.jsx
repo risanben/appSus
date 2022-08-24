@@ -1,10 +1,16 @@
 
 export class NoteEdit extends React.Component {
 
-    render (){
+  state = {
+    text: this.props.note.details.txt,
+  }
 
-       return <div className="note-edit">
-         hello from note-edit 
-         </div>
-    }
-   }
+  render() {
+const {note} = this.props
+
+
+    return <div className="note-edit">
+     
+    </div>
+  }
+}

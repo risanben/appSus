@@ -1,0 +1,61 @@
+.note-add{
+    padding: 20px 0;
+    
+}
+.note-add form input{
+    background-color: var(--main-bg-color);
+    height: 40px;
+    width:400px;
+    /* background-color: red; */
+    border: none;
+}
+.note-add textarea:focus, 
+input:focus{
+    outline: none;
+}
+
+.note-add-form{
+    padding-left: 10px;
+    padding-right: 10px;
+    /* padding-bottom: 5px; */
+    border: 1px solid rgba(0, 0, 0, 0.344);
+    border-radius: 10px;
+    display: flex;
+    align-items: center; 
+    /* justify-items: center; */
+    /* border: 3px yellow solid ; */
+}
+.note-add-form:hover{
+    outline: 1px solid rgb(46, 57, 84);
+}
+
+.note-add-form img{
+    width: 15px;
+}
+
+
+.upload-options-container{
+    width: 110px;
+    display: flex;
+    /* border: 2px solid green; */
+    justify-content: space-between;
+}
+
+/* BUTTONS  */
+.upload-options-container .btn{
+    opacity: 0.7;
+}
+.upload-options-container .btn:hover{
+    opacity: 1;
+}
+
+.note-add-form img.btn2{
+    width: 20px;
+}
+.note-add-form img.btn1{
+    width: 20px;
+}
+
+.btn{
+    cursor: pointer;
+}
