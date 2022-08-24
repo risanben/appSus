@@ -3,21 +3,27 @@ import { mailService } from '../services/mail.service.js'
 
 const { Link } = ReactRouterDOM
 
-export class MailList extends React.Component {
+export function MailList({ mails, onRemoveMail, onStaredMail }) {
 
-  render() {
-    const { mails } = this.props
-
-    return <section className="mail-list">
-      <table border="1">
+  return <section className="mail-list">
+    <table border="1">
+      <tbody>
         {mails.map(mail =>
-          <tr >
+          <tr key={mail.id} className={(mail.isRead) ? "read" : "unread"}>
             <td>
               {/* <input type="checkbox" name="isStared"
-                    value={isStared} id="isStared"
-                    onChange={this.handleChange}
-                /> */}
-              star
+                value={mail.isStared} id="isStared"
+                onChange={() => onStaredMail(mail)}
+              />
+            */}
+              {/* star */}
+
+              <button
+                className={(mail.isStared) ? "Stared" : "unStared"}
+                onClick={() => onStaredMail(mail)}
+              >
+                <span className="star">&#9733;</span>
+              </button>
             </td>
             {/* <Link to={"/mail/" + mail.id}>
               <React.Fragment> */}
@@ -35,14 +41,13 @@ export class MailList extends React.Component {
             {/* </React.Fragment>
             </Link> */}
             <td>
-              X
+              <button onClick={() => onRemoveMail(mail.id)}>X</button>
             </td>
           </tr>
         )}
-
-      </table>
-    </section>
-  }
+      </tbody>
+    </table>
+  </section>
 }
 
 

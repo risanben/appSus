@@ -6,6 +6,7 @@ export class MailFilter extends React.Component {
             subject: '',
             status: '',
             isRead: false,
+            isStared: false,
         },
     }
 
@@ -19,8 +20,11 @@ export class MailFilter extends React.Component {
         console.log('target', target);
         // const value = target.name === 'isRead' ? +(target.value) : target.value
         // const value = target.value
-        if (field === 'isRead') {
+        if (field === 'isRead' || field === 'isStared') {
             value = target.value === 'true' ? false : true
+            // } else if (field === 'isStared') {
+            //     value = target.value === 'true' ? true : false
+            //     console.log('value', value);
         } else {
             value = target.value
         }
@@ -41,8 +45,21 @@ export class MailFilter extends React.Component {
         this.props.onSetFilter(this.state.filterBy)
     }
 
+    cleanFilter = () => {
+        this.setState(() => ({
+            filterBy: {
+                subject: '',
+                status: '',
+                isRead: false,
+                isStared: false,
+            }
+        }), () => {
+            this.props.onSetFilter(this.state.filterBy)
+        })
+    }
+
     render() {
-        const { subject, status, isRead } = this.state.filterBy
+        const { subject, status, isRead, isStared } = this.state.filterBy
         return <section className="mail-filter">
             <form onSubmit={this.onFilter}>
                 <label htmlFor="by-subject">mail search:</label>
@@ -54,6 +71,14 @@ export class MailFilter extends React.Component {
                     value={subject}
                     onChange={this.handleChange}
                 />
+
+                <label htmlFor="by-clean-filter"></label>
+                <button
+                    id="by-clean-filter"
+                    name="all"
+                    // value={'inbox'}
+                    onClick={this.cleanFilter}
+                > Show all</button>
 
                 <label htmlFor="by-inbox"></label>
                 <button
@@ -70,6 +95,14 @@ export class MailFilter extends React.Component {
                     value={'sent'}
                     onClick={this.handleChange}
                 > Sent</button>
+
+                <label htmlFor="by-star"></label>
+                <button
+                    id="by-star"
+                    name="isStared"
+                    value={isStared}
+                    onClick={this.handleChange}
+                > Stared ⭐</button>
 
                 <label htmlFor="by-trash"></label>
                 <button
