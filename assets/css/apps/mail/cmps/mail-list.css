@@ -1,6 +1,9 @@
 .mail-list {
-    /* display: grid;
-  grid-template-columns: 1fr 8fr; */
+    display: flex;
+}
+
+.mail-list table{
+flex-grow: 1;
 }
 
 .mail-list .read {
