@@ -10,7 +10,6 @@ export class NoteApp extends React.Component {
     notes: null,
     filterBy: null,
     selectedNote: null,
-    searchByNote: null
   }
 
 
@@ -36,27 +35,42 @@ export class NoteApp extends React.Component {
 
   onAddNote = (text, type) => {
     NoteService.addNote(text, type)
-        .then(this.loadNotes())
-}
+      .then(this.loadNotes())
+  }
 
   handleNote = (note) => {
     this.setState({ selectedNote: note })
+  }
+
+  onPinNote = (id) => {
+    NoteService.togglePin(id)
+    .then(this.loadNotes())
   }
 
   onColorChange = (id, color) => {
     NoteService.changeColor(id, color)
       .then(this.loadNotes())
   }
+
+  onGoBack = () => {
+    this.setState({ selectedNote: null })
+  }
+
+  updateNote = (id, text) => {
+    NoteService.saveUpdatedNote(id, text)
+      .then(this.loadNotes())
+      .then(this.setState({ selectedNote: null }))
+  }
   render() {
     const { notes, selectedNote } = this.state
 
     return <section className="note-app">
       <NoteFilter onFilterChange={this.onFilterChange} />
+      {selectedNote && <NoteEdit note={selectedNote} updateNote={this.updateNote} onGoBack={this.onGoBack} />}
       <div className="main-container">
-        {selectedNote && <NoteEdit note={selectedNote}  />}
-        <NoteAdd onAddNote={this.onAddNote}/>
+        <NoteAdd onAddNote={this.onAddNote} />
 
-        <NoteList notes={notes} handleNote={this.handleNote} onRemoveNote={this.onRemoveNote} onColorChange={this.onColorChange} />
+        <NoteList notes={notes}onPinNote={this.onPinNote} handleNote={this.handleNote} onRemoveNote={this.onRemoveNote} onColorChange={this.onColorChange} />
       </div>
     </section>
   }

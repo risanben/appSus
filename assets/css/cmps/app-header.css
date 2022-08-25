@@ -1,28 +1,40 @@
 header {
-    background: var(--main-bg-color);
-    border-bottom: 2px solid white;
+    background: var(--selected-filter-bg-color);
+    border-bottom: 3px solid white;
 }
 
 .app-header {
     display: flex;
     justify-content: space-between;
-    padding: 20px 0;
+    align-items: center;
+    /* padding: 20px 0; */
+}
+
+.app-header nav{
+    padding-inline-end: 20px;
 }
 
 nav a {
     margin: .5em;
+    font-family: lato;
 }
 
 nav a:active {
-    color: purple;
+    color: white;
 }
 
 nav a.active {
-    color: darkblue;
+    color: black;
     font-weight: bold;
     text-decoration: overline;
 }
 
+
+/* LOGO  */
+
+.logo-container{
+    padding: 20px 0 20px 20px;
+}
 .item{
     font-family: lato-bold;
     font-size: 30px;

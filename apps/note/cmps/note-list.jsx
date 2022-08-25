@@ -1,11 +1,11 @@
 import { NotePreview } from './note-preview.jsx'
 
-export function NoteList({ notes,onRemoveNote,onColorChange,handleNote }) {
+export function NoteList({ notes,onRemoveNote,onColorChange,handleNote,onPinNote }) {
     
 
     return <React.Fragment>
         {notes && <section className="note-list">
-                {notes.map(note=><NotePreview key={note.id} note={note} onRemoveNote={onRemoveNote} onColorChange={onColorChange}handleNote={handleNote}/>)}
+                {notes.map(note=><NotePreview key={note.id}onPinNote={onPinNote} note={note} onRemoveNote={onRemoveNote} onColorChange={onColorChange}handleNote={handleNote}/>)}
                 </section>}
     </React.Fragment>
 }
