@@ -7,7 +7,8 @@ export const NoteService = {
     changeColor,
     addNote,
     saveUpdatedNote,
-    togglePin
+    togglePin,
+    getTodo
 }
 
 const NOTES_KEY = 'noteDB'
@@ -24,13 +25,24 @@ function query(filterBy) {
     return Promise.resolve(notes)
 }
 
-function removeNote(noteId) {
+function removeNote(Id) {
     const notes = storageService.loadFromStorage(NOTES_KEY)
-    const noteIdx = _getNoteIdx(noteId)
+    const noteIdx = _getNoteIdx(Id)
     notes.splice(noteIdx, 1)
     storageService.saveToStorage(NOTES_KEY, notes)
     return Promise.resolve()
+}
 
+function getTodo(rawTxt){
+    const todoArr = rawTxt.split(',')
+    const title = todoArr.shift()
+    const todoTasks = todoArr.map(todo => ({
+        id: utilService.makeId(),
+        txt: todo,
+        isDone: 'false'
+    }))
+    // console.log('todoTask:', title, todoTasks)
+    return Promise.resolve({todoTasks,title})  
 }
 
 function addNote(txt, type) {
@@ -78,10 +90,10 @@ function togglePin(id){
     const notes = storageService.loadFromStorage(NOTES_KEY)
     const noteIdx = _getNoteIdx(id)
     notes[noteIdx].isNotePinned = !notes[noteIdx].isNotePinned
-    if (notes[noteIdx].details.color = "pink"){
+    if (notes[noteIdx].details.color === "#F1C7DA"){
         notes[noteIdx].details.color = "white"
     } else {
-        notes[noteIdx].details.color = "pink"
+        notes[noteIdx].details.color = "#F1C7DA"
     }
     
     storageService.saveToStorage(NOTES_KEY, notes)
@@ -112,7 +124,7 @@ const gNotes = [
         id: utilService.makeId(),
         type: 'todo',
         details: {
-            txt: 'TODO: remember to have lunch even if the after-class ends at 15:30pm',
+            txt: 'Groceries, milk, watermelon, lollies',
             color: 'white'
         },
         isNotePinned: false
@@ -175,7 +187,7 @@ const gNotes = [
         id: utilService.makeId(),
         type: 'todo',
         details: {
-            txt: 'TODO: remember to complete sprint 3 so Yaron can be proud',
+            txt: 'Coding-Academy, sprint3, sprint4, course-completion',
             color: 'white'
         },
         isNotePinned: false
@@ -185,9 +197,9 @@ const gNotes = [
         type: 'image',
         details: {
             txt: "https://www.tabulait.com/wp-content/uploads/2022/01/Laptop-1000x667-1.jpg",
-            color: 'white'
+            color: '#F1C7DA'
         },
-        isNotePinned: false
+        isNotePinned: true
     },
     {
         id: utilService.makeId(),
@@ -202,10 +214,10 @@ const gNotes = [
         id: utilService.makeId(),
         type: 'todo',
         details: {
-            txt: "TODO : stay positive while Yaron is reviewing this code",
-            color: 'white'
+            txt: "Pack, clothers, sunnies, flip-flop",
+            color: '#F1C7DA'
         },
-        isNotePinned: false
+        isNotePinned: true
     },
 
 ]
