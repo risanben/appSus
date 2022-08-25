@@ -6,10 +6,27 @@
 }
 
 .mail-header .mail-count {
-    /* float: inline-end; */
-    float: right;
+    float: inline-end;
+    margin: 15px;
+    /* float: right; */
 }
 
-.up-filter{
+.up-filter {
     /* grid-column: 2/3; */
+}
+
+.mail-header .by-subject {
+    border-radius: 15px;
+    margin: 10px;
+    height: 2.5em;
+    width: 25em;
+}
+
+.mail-header div {
+    font-family: lato;
+    padding: 10px 5px;
+    border-radius: 15px;
+    text-align: left;
+    border: 1px black solid;
+    margin: 5px;
 }

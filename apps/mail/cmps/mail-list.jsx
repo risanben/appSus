@@ -6,20 +6,13 @@ const { Link } = ReactRouterDOM
 export function MailList({ mails, onRemoveMail, onStaredMail }) {
 
   return <section className="mail-list">
-    <table border="1">
+    <table /*border="1"*/>
       <tbody>
         {mails.map(mail =>
           <tr key={mail.id} className={(mail.isRead) ? "read" : "unread"}>
             <td>
-              {/* <input type="checkbox" name="isStared"
-                value={mail.isStared} id="isStared"
-                onChange={() => onStaredMail(mail)}
-              />
-            */}
-              {/* star */}
-
               <button
-                className={(mail.isStared) ? "Stared" : "unStared"}
+                className={(mail.isStared) ? "stared" : "unStared"}
                 onClick={() => onStaredMail(mail)}
               >
                 <span className="star">&#9733;</span>
@@ -28,7 +21,7 @@ export function MailList({ mails, onRemoveMail, onStaredMail }) {
             {/* <Link to={"/mail/" + mail.id}>
               <React.Fragment> */}
             <td>
-              {mail.from}
+            <Link to={"/mail/" + mail.id}>{mail.from} </Link>
             </td>
             <td>
               <MailPreview

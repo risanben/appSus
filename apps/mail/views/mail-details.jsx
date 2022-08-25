@@ -19,7 +19,6 @@ export class MailDetails extends React.Component {
 
     loadMail = () => {
         const { mailId } = this.props.match.params
-        console.log('mailId', mailId);
         mailService.getById(mailId)
             .then((mail) => {
                 if (!mail) return this.onGoBack()
@@ -35,8 +34,6 @@ export class MailDetails extends React.Component {
 
     render() {
         const { mail } = this.state
-        console.log('MailDetails-mail', mail);
-        console.log('RENDERED', this.props);
         if (!mail) return <div>Loading...</div>
 
         return <section className="mail-details">

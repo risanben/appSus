@@ -12,7 +12,6 @@ export class TodoPreview extends React.Component {
         const { txt } = note.details
         NoteService.getTodo(txt)
             .then((res) => {
-                // console.log('res:', res)
                 this.setState({ title: res.title, tasks: res.todoTasks })
             })
     }
@@ -31,7 +30,6 @@ export class TodoPreview extends React.Component {
 
     render() {
         const { tasks, title } = this.state
-        // console.log('this.state:', this.state)
 
         return <React.Fragment>
             {(tasks && title) && <section className="todo-note-container">

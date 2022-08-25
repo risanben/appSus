@@ -49,21 +49,8 @@ function query(filterBy) {
         mails = _createMails()
         _saveToStorage(MAINKEY, mails)
     }
-
-    // if (filterBy) {
-    //     let { subject, status } = filterBy
-    //     console.log('query-filterBy status', status);
-    //     mails = mails.filter(mail => (
-    //         (mail.subject.includes(subject) ||
-    //             mail.body.includes(subject))
-    //         // mail.status === status
-    //     ))
-    // }/*-------------------------------------------*/
     if (filterBy) {
         let { subject, status, isRead, isStared } = filterBy
-
-        console.log('query-filterBy isStared', isStared);
-        console.log('mails', mails);
 
         if (isStared) {
             mails = mails.filter(mail => (
@@ -76,18 +63,17 @@ function query(filterBy) {
             ))
             if (status === 'trash') {
                 mails = _loadFromStorage(TRASHKEY)
-                console.log('else if (status)-trash', mails);
                 if (mails) return Promise.resolve(mails)
             }
         }
 
-        console.log(mails);
         if (mails) {
             mails = mails.filter(mail => (
                 (mail.subject.includes(subject) ||
                     mail.body.includes(subject))
             ))
-            console.log('query mails-', mails);
+            
+            console.log(mails);
             return Promise.resolve(mails)
         } else {
             return Promise.reject('No search results were found')
@@ -104,7 +90,6 @@ function remove(mailId) {
     mails = mails.filter(mail => mail.id !== mailId)
     _saveToStorage(MAINKEY, mails)
     /*-----------------------------------------------*/
-    console.log(removedMail[0]);
     let removedMails = _loadFromStorage(TRASHKEY)
     if (!removedMails) removedMails = []
     removedMails.push(removedMail[0])
@@ -116,7 +101,6 @@ function remove(mailId) {
 
 
 function save(mail) {
-    console.log('save(mail)', mail);
     if (mail.id) return update(mail)
     else return _add(mail)
 }
