@@ -27,6 +27,7 @@ export class NotePreview extends React.Component {
             {note.type === 'image' && <img className="note-img" src={note.details.txt} />}
             {note.type === 'video' && <video className="note-vid" src={note.details.txt} controls autoPlay></video>}
             {note.type === 'todo' && < TodoPreview note={note}/>}
+            {note.type === 'audio' && <audio ref="audio_tag" src={note.details.txt} controls />}
 
             <div className="note-btns-container">
                 <img src="assets/img/icons/trash.png" title="Discard" onClick={() => onRemoveNote(note.id)} className="note-btn" alt="" />

@@ -1,5 +1,7 @@
 .note-add{
     padding: 20px 0;
+    /* border: 2px red solid; */
+    /* min-width: 590px; */
     
 }
 .note-add form input{
@@ -9,6 +11,8 @@
     /* background-color: red; */
     border: none;
 }
+
+
 .note-add textarea:focus, 
 input:focus{
     outline: none;
@@ -19,6 +23,8 @@ input:focus{
     padding-right: 10px;
     /* padding-bottom: 5px; */
     border: 1px solid rgba(0, 0, 0, 0.344);
+    /* min-height: 42px; */
+    /* min-width: 580px; */
     border-radius: 10px;
     display: flex;
     align-items: center; 
@@ -29,13 +35,18 @@ input:focus{
     outline: 1px solid rgb(46, 57, 84);
 }
 
-.note-add-form img{
+
+.btn.btn0,
+.btn.btn1,
+.btn.btn2,
+.btn.btn3,
+.btn.btn4{
     width: 15px;
 }
 
 
 .upload-options-container{
-    width: 110px;
+    width: 160px;
     display: flex;
     /* border: 2px solid green; */
     justify-content: space-between;
@@ -58,4 +69,21 @@ input:focus{
 
 .btn{
     cursor: pointer;
+}
+
+/* RECORDING IMG  */
+
+.rec-img{
+    padding: 9px 0 9px 0;
+    width: 20px;
+    opacity: 0.8;
+    cursor: pointer;
+}
+
+.audio-btns-container{
+    /* border: 2px solid red; */
+    width: 100px;
+    margin-inline-end: 70px;
+    display: flex;
+    justify-content: space-between;
 }

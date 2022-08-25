@@ -40,7 +40,12 @@
  transition: opacity 0.3s;
  display: flex;
  justify-content: space-between;
+ /* border: 10px solid green; */
 }
 .note-preview:hover .note-btns-container{
     opacity: 1;
+}
+
+audio{
+    max-width: 240px;
 }

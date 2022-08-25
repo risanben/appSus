@@ -4,3 +4,7 @@
     /* border: 3px solid red; */
 }
 
+h4.pinned,
+h4.others{
+    align-self: flex-start;
+}
