@@ -60,10 +60,11 @@ export class MailApp extends React.Component {
 
     render() {
         const { mails } = this.state
+        const len = mails.length
         const { onSetFilter, onRemoveMail, onStaredMail } = this
         return <div className="mail-app">
-            <MailHeader />
-            <MailFilter onSetFilter={onSetFilter} />
+            <MailHeader numOfMailToDisplay={len} onSetFilter={onSetFilter} />
+            <MailFilter onSetFilter={onSetFilter} sideOrUp={'side'} />
             <MailList mails={mails} onRemoveMail={onRemoveMail} onStaredMail={onStaredMail} />
             {/* <MailEdit /> */}
         </div>

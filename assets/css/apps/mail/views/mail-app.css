@@ -1,11 +1,18 @@
 .mail-app {
     background-color: rgb(221, 238, 247);
     display: grid;
-    grid-template-columns: 1fr 10fr;
+    grid-template-columns: minmax(200px, 1fr) 10fr;
     grid-template-rows: 1fr 25fr;
 }
 
 .mail-header {
     grid-column: 1/-1;
     display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+
+.mail-header .mail-count {
+    float: inline-end;
+    /* float: right; */
 }

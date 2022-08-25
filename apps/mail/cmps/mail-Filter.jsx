@@ -61,74 +61,86 @@ export class MailFilter extends React.Component {
 
     render() {
         const { subject, status, isRead, isStared } = this.state.filterBy
-        return <section className="mail-filter">
+        const { sideOrUp } = this.props
+        let sideDisplay = sideOrUp === 'side' ? true : false
+        console.log('sideOrUp', sideOrUp);
+        return <section className={sideDisplay ? 'mail-filter' : 'up-filter'}>
             <form onSubmit={this.onFilter}>
-                <label htmlFor="by-subject">mail search:</label>
-                <input
-                    type="text"
-                    placeholder="by subject or mail body.."
-                    id="by-subject"
-                    name="subject"
-                    value={subject}
-                    onChange={this.handleChange}
-                />
+                {!sideDisplay && <label htmlFor="by-subject">mail search:
+                    <input
+                        type="text"
+                        placeholder="by subject or mail body.."
+                        id="by-subject"
+                        name="subject"
+                        value={subject}
+                        onChange={this.handleChange}
+                    /></label>}
+                {sideDisplay && <React.Fragment>
 
-                <label htmlFor="by-clean-filter"></label>
-                <button
-                    id="by-clean-filter"
-                    name="status"
-                    value={''}
-                    onClick={this.cleanFilter}
-                > Show all</button>
+                    <div
+                        className="filter-btn"
+                        id="by-clean-filter"
+                        name="status"
+                        value={''}
+                        onClick={this.cleanFilter}
+                    > Show all</div>
 
-                <label htmlFor="by-inbox"></label>
-                <button
-                    id="by-inbox"
-                    name="status"
-                    value={'inbox'}
-                    onClick={this.handleChange}
-                > Inbox</button>
+                    {/* <label htmlFor="by-clean-filter">
+                        <button
+                            id="by-clean-filter"
+                            name="status"
+                            value={''}
+                            onClick={this.cleanFilter}
+                        > Show all</button></label> */}
 
-                <label htmlFor="by-sent"></label>
-                <button
-                    id="by-sent"
-                    name="status"
-                    value={'sent'}
-                    onClick={this.handleChange}
-                > Sent</button>
+                    <div
+                        className="filter-btn"
+                        id="by-inbox"
+                        name="status"
+                        value={'inbox'}
+                        onClick={this.handleChange}
+                    > Inbox</div>
 
-                <label htmlFor="by-star"></label>
-                <button
-                    id="by-star"
-                    name="isStared"
-                    value={isStared}
-                    onClick={this.handleChange}
-                > Stared ⭐</button>
+                    <div
+                        className="filter-btn"
+                        id="by-sent"
+                        name="status"
+                        value={'sent'}
+                        onClick={this.handleChange}
+                    > Sent</div>
 
-                <label htmlFor="by-trash"></label>
-                <button
-                    id="by-trash"
-                    name="status"
-                    value={'trash'}
-                    onClick={this.handleChange}
-                > trash</button>
+                    <div
+                        className="filter-btn"
+                        id="by-star"
+                        name="isStared"
+                        value={isStared}
+                        onClick={this.handleChange}
+                    >⭐ Stared</div>
 
-                <label htmlFor="by-draft"></label>
-                <button
-                    id="by-draft"
-                    name="status"
-                    value={'draft'}
-                    onClick={this.handleChange}
-                > draft</button>
+                    <div
+                        className="filter-btn"
+                        id="by-trash"
+                        name="status"
+                        value={'trash'}
+                        onClick={this.handleChange}
+                    > <img className="filter-icon" src="assets/img/icons/trash.png" />trash</div>
 
-                <label htmlFor="by-UnRead"></label>
-                <button
-                    id="by-UnRead"
-                    name="isRead"
-                    value={isRead}
-                    onClick={this.handleChange}
-                > UnRead</button>
+                    <div
+                        className="filter-btn"
+                        id="by-draft"
+                        name="status"
+                        value={'draft'}
+                        onClick={this.handleChange}
+                    > draft</div>
 
+                    <div
+                        className="filter-btn"
+                        id="by-UnRead"
+                        name="isRead"
+                        value={isRead}
+                        onClick={this.handleChange}
+                    > UnRead</div>
+                </React.Fragment>}
             </form>
 
 

@@ -15,6 +15,7 @@
 @import './apps/note/views/note-app.css';
 
 @import './apps/mail/views/mail-app.css';
+@import './apps/mail/views/mail-edit.css';
 
 /* Cmps */
 
