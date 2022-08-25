@@ -1,4 +1,4 @@
-
+import { TodoPreview } from "../cmps/note-todo-preview.jsx"
 export class NotePreview extends React.Component {
 
 
@@ -20,21 +20,22 @@ export class NotePreview extends React.Component {
     // }
 
     render() {
-        const { note, onRemoveNote, handleNote,onPinNote } = this.props
+        const { note, onRemoveNote, handleNote, onPinNote } = this.props
 
         return <section className="note-preview" style={{ backgroundColor: note.details.color }}>
-            {(note.type === 'text' || note.type === 'todo') && <div>{`${note.details.txt}`}</div>}
+            {note.type === 'text' && <div>{`${note.details.txt}`}</div>}
             {note.type === 'image' && <img className="note-img" src={note.details.txt} />}
             {note.type === 'video' && <video className="note-vid" src={note.details.txt} controls autoPlay></video>}
+            {note.type === 'todo' && < TodoPreview note={note}/>}
 
             <div className="note-btns-container">
-                <img src="assets/img/icons/trash.png"title="Discard" onClick={() => onRemoveNote(note.id)} className="note-btn" alt="" />
+                <img src="assets/img/icons/trash.png" title="Discard" onClick={() => onRemoveNote(note.id)} className="note-btn" alt="" />
                 <label >
-                    <img className="note-btn" src="assets/img/icons/color.png" title="Color"alt="" />
+                    <img className="note-btn" src="assets/img/icons/color.png" title="Color" alt="" />
                     <input name={note.id} type="color" hidden onChange={this.handleInputChange} />
                 </label>
-                <img src="assets/img/icons/pencil.png" onClick={() => handleNote(note)} title="Edit"className="note-btn" alt="" />
-                <img src="assets/img/icons/pin-icon.png" onClick={() => onPinNote(note.id)} title="Pin"className="note-btn" alt="" />
+                <img src="assets/img/icons/pencil.png" onClick={() => handleNote(note)} title="Edit" className="note-btn" alt="" />
+                <img src="assets/img/icons/pin-icon.png" onClick={() => onPinNote(note.id)} title="Pin" className="note-btn" alt="" />
             </div>
         </section>
     }
