@@ -5,7 +5,7 @@ import { MailHeader } from "../cmps/mail-header.jsx"
 import { MailEdit } from "./mail-edit.jsx"
 import { mailService } from '../services/mail.service.js'
 
-import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js';
+import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 
 export class MailApp extends React.Component {
     state = {
@@ -21,6 +21,10 @@ export class MailApp extends React.Component {
     loadMails = () => {
         mailService.query(this.state.filterBy)
             .then(mails => this.setState({ mails }))
+            .catch(err => {
+                console.log('Problem!!', err)
+                showErrorMsg('No search results were found')
+            })
     }
 
     onSetFilter = (filterBy) => {
@@ -38,7 +42,7 @@ export class MailApp extends React.Component {
             })
             .catch(err => {
                 console.log('Problem!!', err)
-                // showErrorMsg('Cannot remove mail')
+                showErrorMsg('Cannot remove mail')
             })
     }
 
@@ -50,7 +54,7 @@ export class MailApp extends React.Component {
                 console.log('update')
                 const mails = this.state.mails.map(mail => mail.id === mailToUpdate.id ? mailToUpdate : mail)
                 this.setState({ mails })
-                showSuccessMsg('mail update')
+                // showSuccessMsg('mail update')
             })
     }
 

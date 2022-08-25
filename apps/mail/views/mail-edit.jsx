@@ -6,6 +6,7 @@ export class MailEdit extends React.Component {
             subject: '',
             body: '',
             to: '',
+            status: '',
         }
     }
 
@@ -72,7 +73,8 @@ export class MailEdit extends React.Component {
                     onChange={this.handleChange}
                 />
 
-                <button>Save</button>
+                <button value={'draft'} name="status" onClick={this.handleChange}>Save</button>
+                <button value={'sent'} name="status" onClick={this.handleChange}>Send</button>
             </form>
         </section>
     }

@@ -70,17 +70,30 @@ function query(filterBy) {
                 mail.isStared === isStared
             ))
         } else if (status) {
+            console.log('status', status);
             mails = mails.filter(mail => (
                 mail.status === status
             ))
+            if (status === 'trash') {
+                mails = _loadFromStorage(TRASHKEY)
+                console.log('else if (status)-trash', mails);
+                if (mails) return Promise.resolve(mails)
+            }
         }
-        mails = mails.filter(mail => (
-            (mail.subject.includes(subject) ||
-                mail.body.includes(subject))
-        ))
+
+        console.log(mails);
+        if (mails) {
+            mails = mails.filter(mail => (
+                (mail.subject.includes(subject) ||
+                    mail.body.includes(subject))
+            ))
+            console.log('query mails-', mails);
+            return Promise.resolve(mails)
+        } else {
+            return Promise.reject('No search results were found')
+        }
 
     }
-    // }/*-------------------------------------------*/
     console.log('query mails-', mails);
     return Promise.resolve(mails)
 }
@@ -90,18 +103,27 @@ function remove(mailId) {
     let removedMail = mails.filter(mail => mail.id === mailId)
     mails = mails.filter(mail => mail.id !== mailId)
     _saveToStorage(MAINKEY, mails)
-    _saveToStorage(TRASHKEY, removedMail)
+    /*-----------------------------------------------*/
+    console.log(removedMail[0]);
+    let removedMails = _loadFromStorage(TRASHKEY)
+    if (!removedMails) removedMails = []
+    removedMails.push(removedMail[0])
+    _saveToStorage(TRASHKEY, removedMails)
+    /*-----------------------------------------------*/
     return Promise.resolve()
 }
 
+
+
 function save(mail) {
+    console.log('save(mail)', mail);
     if (mail.id) return update(mail)
     else return _add(mail)
 }
 
-function _add({ subject, body, date = new Date(), to }) {
+function _add({ subject, body, date = new Date(), to, status }) {
     let mails = _loadFromStorage(MAINKEY)
-    const mail = _createMail(subject, body, date, to, 'user@appsus.com')
+    const mail = _createMail(subject, body, date, to, 'user@appsus.com', status)
     mails = [mail, ...mails]
     _saveToStorage(MAINKEY, mails)
     return Promise.resolve(mail)
@@ -117,7 +139,7 @@ function update(mailToUpdate) {
     return Promise.resolve(mailToUpdate)
 }
 
-function _createMail(subject = utilService.makeLorem(3), body = utilService.makeLorem(50), date = utilService.getRandomIntInclusive(13), to = getMailAdders(), from = getMailAdders()) {
+function _createMail(subject = utilService.makeLorem(3), body = utilService.makeLorem(50), date = utilService.getRandomIntInclusive(13), to = getMailAdders(), from = getMailAdders(), status = (from === 'user@appsus.com' ? 'sent' : 'inbox')) {
 
     return {
         id: utilService.makeId(),
@@ -127,7 +149,7 @@ function _createMail(subject = utilService.makeLorem(3), body = utilService.make
         sentAt: date,
         to,
         from,
-        status: from === 'user@appsus.com' ? 'sent' : 'inbox'
+        status
     }
 }
 
