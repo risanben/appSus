@@ -15,6 +15,18 @@ export class MailEdit extends React.Component {
         this.loadMail()
     }
 
+    // componentDidMount() {
+    //     this.unsubscribe = eventBusService.on('show-user-msg', (msg) => {
+    //       this.setState({ msg })
+    //       setTimeout(this.closeMsg, 3000)
+    //     })
+    //   }
+    
+    //   componentWillUnmount() {
+    //     this.unsubscribe()
+    //   }
+
+
     loadMail = () => {
         const { mailId } = this.props.match.params
         if (!mailId) return

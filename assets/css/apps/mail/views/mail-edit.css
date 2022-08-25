@@ -1,0 +1,9 @@
+.mail-edit {
+    background-color: lightgray;
+    padding: 1em;
+    position: absolute;
+    bottom: 0;
+    right: 1em;
+    min-width: 500px;
+    min-height: 400px;
+}
