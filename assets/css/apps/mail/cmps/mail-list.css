@@ -2,8 +2,23 @@
     display: flex;
 }
 
-.mail-list table{
-flex-grow: 1;
+.mail-list table {
+    flex-grow: 1;
+    border-collapse: collapse
+}
+
+.mail-list tr {
+    max-height: 10px;
+}
+
+.mail-list td {
+    border-bottom: 1px solid rgb(231, 222, 246);
+
+    /* border-spacing: length|initial|inherit; */
+}
+
+.mail-list tr:hover {
+    background-color: var(--selected-filter-bg-color);
 }
 
 .mail-list .read {
@@ -14,10 +29,18 @@ flex-grow: 1;
     background-color: var(--unread-bg-color);
 }
 
-.mail-list .Stared {
+.mail-list .unStared {
+    color: rgba(188, 185, 185, 0.712);
+}
+
+.mail-list .stared {
     color: gold;
 }
 
-.mail-list .unStared {
-    color: black;
+
+.mail-list button {
+    border: none;
+    margin: 0;
+    background: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
 }

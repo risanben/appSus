@@ -41,7 +41,6 @@ function getTodo(rawTxt){
         txt: todo,
         isDone: 'false'
     }))
-    // console.log('todoTask:', title, todoTasks)
     return Promise.resolve({todoTasks,title})  
 }
 
