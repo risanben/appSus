@@ -7,7 +7,10 @@ export class MailEdit extends React.Component {
             body: '',
             to: '',
             status: '',
-        }
+        },
+        // edit:{
+        //     isNew: true   // new or draft
+        // }
     }
 
     componentDidMount() {
@@ -21,7 +24,7 @@ export class MailEdit extends React.Component {
     //       setTimeout(this.closeMsg, 3000)
     //     })
     //   }
-    
+
     //   componentWillUnmount() {
     //     this.unsubscribe()
     //   }
@@ -62,28 +65,42 @@ export class MailEdit extends React.Component {
     //     return /\S+@\S+\.\S+/.test(email)
     // }
 
+    onGoBack = () => {
+        this.props.history.push('/mail')
+    }
+
     render() {
         const { subject, body, to } = this.state.mail
         return <section className="mail-edit">
+            <header className="header">
+                <button className="btn" onClick={this.onGoBack}>X</button>
+            </header>
             <form className="flex column align-center" onSubmit={this.onSaveMail}>
 
-                <label htmlFor="subject">subject</label>
-                <input type="text" name="subject"
-                    value={subject} id="subject"
+                {/* <label htmlFor="to">to</label> */}
+                <input type="mail" name="to"
+                className="txt to"
+                    value={to} id="to"
+                    placeholder="To.."
                     onChange={this.handleChange}
                 />
 
-                <label htmlFor="body">body</label>
+                {/* <label htmlFor="subject">subject</label> */}
+                <input type="text" name="subject"
+                 className="txt subject"
+                    value={subject} id="subject"
+                    placeholder="subject..."
+                    onChange={this.handleChange}
+                />
+
+                {/* <label htmlFor="body">body</label> */}
                 <input type="text" name="body"
+                className="txt body"
                     value={body} id="body"
                     onChange={this.handleChange}
                 />
 
-                <label htmlFor="to">to</label>
-                <input type="mail" name="to"
-                    value={to} id="to"
-                    onChange={this.handleChange}
-                />
+
 
                 <button value={'draft'} name="status" onClick={this.handleChange}>Save</button>
                 <button value={'sent'} name="status" onClick={this.handleChange}>Send</button>
