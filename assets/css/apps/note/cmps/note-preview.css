@@ -5,7 +5,7 @@
     margin-bottom: 20px;
     display: inline-flex;
     flex-direction: column;
-    /* border: 2px solid green; */
+    min-width: 160px;
 
 }
 
