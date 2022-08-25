@@ -36,15 +36,18 @@ const criteria = {
 }
 
 
-const KEY = 'mailsDB'
+const MAINKEY = 'mailsDB'
+const TRASHKEY = 'trashDB'
+const DRAFTKEY = 'draftDB'
+
 
 function query(filterBy) {
     console.log('mailService-query-filterBy', filterBy);
 
-    let mails = _loadFromStorage()
+    let mails = _loadFromStorage(MAINKEY)
     if (!mails) {
         mails = _createMails()
-        _saveToStorage(mails)
+        _saveToStorage(MAINKEY, mails)
     }
 
     // if (filterBy) {
@@ -61,13 +64,16 @@ function query(filterBy) {
 
         console.log('query-filterBy isStared', isStared);
         console.log('mails', mails);
-        // mails = mails.filter(mail => (
-        //     mail.isStared === isStared
-        // ))
-        mails = mails.filter(mail => (
-            mail.status === status &&
-            mail.isRead === isRead
-        ))
+
+        if (isStared) {
+            mails = mails.filter(mail => (
+                mail.isStared === isStared
+            ))
+        } else if (status) {
+            mails = mails.filter(mail => (
+                mail.status === status
+            ))
+        }
         mails = mails.filter(mail => (
             (mail.subject.includes(subject) ||
                 mail.body.includes(subject))
@@ -75,14 +81,16 @@ function query(filterBy) {
 
     }
     // }/*-------------------------------------------*/
-
+    console.log('query mails-', mails);
     return Promise.resolve(mails)
 }
 
 function remove(mailId) {
-    let mails = _loadFromStorage()
+    let mails = _loadFromStorage(MAINKEY)
+    let removedMail = mails.filter(mail => mail.id === mailId)
     mails = mails.filter(mail => mail.id !== mailId)
-    _saveToStorage(mails)
+    _saveToStorage(MAINKEY, mails)
+    _saveToStorage(TRASHKEY, removedMail)
     return Promise.resolve()
 }
 
@@ -92,20 +100,20 @@ function save(mail) {
 }
 
 function _add({ subject, body, date = new Date(), to }) {
-    let mails = _loadFromStorage()
+    let mails = _loadFromStorage(MAINKEY)
     const mail = _createMail(subject, body, date, to, 'user@appsus.com')
     mails = [mail, ...mails]
-    _saveToStorage(mails)
+    _saveToStorage(MAINKEY, mails)
     return Promise.resolve(mail)
 }
 
 function update(mailToUpdate) {
-    let mails = _loadFromStorage()
+    let mails = _loadFromStorage(MAINKEY)
     mails = mails.map(mail => mail.id === mailToUpdate.id ? mailToUpdate : mail)
 
     console.log('service update-mails', mails);
     console.log('service update-mailToUpdate', mailToUpdate);
-    _saveToStorage(mails)
+    _saveToStorage(MAINKEY, mails)
     return Promise.resolve(mailToUpdate)
 }
 
@@ -139,15 +147,15 @@ function _createMails() {
 
 function getById(mailId) {
     if (!mailId) return Promise.resolve(null)
-    const mails = _loadFromStorage()
+    const mails = _loadFromStorage(MAINKEY)
     const mail = mails.find(mail => mailId === mail.id)
     return Promise.resolve(mail)
 }
 
-function _saveToStorage(mails) {
-    storageService.saveToStorage(KEY, mails)
+function _saveToStorage(key, mails) {
+    storageService.saveToStorage(key, mails)
 }
 
-function _loadFromStorage() {
-    return storageService.loadFromStorage(KEY)
+function _loadFromStorage(key) {
+    return storageService.loadFromStorage(key)
 }

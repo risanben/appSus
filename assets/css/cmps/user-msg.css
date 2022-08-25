@@ -7,11 +7,11 @@
 }
 
 .user-msg.success {
-    background-color: lightgreen;
+    background-color: rgb(182, 247, 182);
 }
 
 .user-msg.error {
-    background-color: lightpink;
+    background-color: rgb(253, 211, 217);
 }
 
 

@@ -7,6 +7,7 @@ export class MailFilter extends React.Component {
             status: '',
             isRead: false,
             isStared: false,
+            isFiltered: false,
         },
     }
 
@@ -20,7 +21,7 @@ export class MailFilter extends React.Component {
         console.log('target', target);
         // const value = target.name === 'isRead' ? +(target.value) : target.value
         // const value = target.value
-        if (field === 'isRead' || field === 'isStared') {
+        if (field === 'isRead' || field === 'isStared' || field === 'isFiltered') {
             value = target.value === 'true' ? false : true
             // } else if (field === 'isStared') {
             //     value = target.value === 'true' ? true : false
@@ -75,8 +76,8 @@ export class MailFilter extends React.Component {
                 <label htmlFor="by-clean-filter"></label>
                 <button
                     id="by-clean-filter"
-                    name="all"
-                    // value={'inbox'}
+                    name="status"
+                    value={''}
                     onClick={this.cleanFilter}
                 > Show all</button>
 

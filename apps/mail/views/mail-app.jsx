@@ -5,6 +5,8 @@ import { MailHeader } from "../cmps/mail-header.jsx"
 import { MailEdit } from "./mail-edit.jsx"
 import { mailService } from '../services/mail.service.js'
 
+import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js';
+
 export class MailApp extends React.Component {
     state = {
         mails: [],
@@ -32,7 +34,7 @@ export class MailApp extends React.Component {
                 console.log('Removed!')
                 const mails = this.state.mails.filter(mail => mail.id !== mailId)
                 this.setState({ mails })
-                // showSuccessMsg('mail removed')
+                showSuccessMsg('mail removed')
             })
             .catch(err => {
                 console.log('Problem!!', err)
@@ -48,7 +50,7 @@ export class MailApp extends React.Component {
                 console.log('update')
                 const mails = this.state.mails.map(mail => mail.id === mailToUpdate.id ? mailToUpdate : mail)
                 this.setState({ mails })
-                // showSuccessMsg('mail update')
+                showSuccessMsg('mail update')
             })
     }
 

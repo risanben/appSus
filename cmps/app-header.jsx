@@ -1,3 +1,5 @@
+import { UserMsg } from './user-msg.jsx'
+
 const { Link, NavLink, withRouter } = ReactRouterDOM
 export function AppHeader() {
 
@@ -12,6 +14,7 @@ export function AppHeader() {
                 <span className="logo item item6">S</span>
             </div>
         </Link>
+        <UserMsg />
         <nav>
             <NavLink exact to="/">Home</NavLink>
             <NavLink to="/about">About</NavLink>
