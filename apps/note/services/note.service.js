@@ -90,10 +90,10 @@ function togglePin(id){
     const notes = storageService.loadFromStorage(NOTES_KEY)
     const noteIdx = _getNoteIdx(id)
     notes[noteIdx].isNotePinned = !notes[noteIdx].isNotePinned
-    if (notes[noteIdx].details.color === "#F1C7DA"){
+    if (notes[noteIdx].details.color === "#F6E1EA"){
         notes[noteIdx].details.color = "white"
     } else {
-        notes[noteIdx].details.color = "#F1C7DA"
+        notes[noteIdx].details.color = "#F6E1EA"
     }
     
     storageService.saveToStorage(NOTES_KEY, notes)
@@ -197,7 +197,7 @@ const gNotes = [
         type: 'image',
         details: {
             txt: "https://www.tabulait.com/wp-content/uploads/2022/01/Laptop-1000x667-1.jpg",
-            color: '#F1C7DA'
+            color: '#F6E1EA'
         },
         isNotePinned: true
     },
@@ -214,8 +214,8 @@ const gNotes = [
         id: utilService.makeId(),
         type: 'todo',
         details: {
-            txt: "Pack, clothers, sunnies, flip-flop",
-            color: '#F1C7DA'
+            txt: "Pack, clothes, sunnies, flip-flop",
+            color: '#F6E1EA'
         },
         isNotePinned: true
     },
