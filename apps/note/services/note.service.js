@@ -78,11 +78,12 @@ function togglePin(id){
     const notes = storageService.loadFromStorage(NOTES_KEY)
     const noteIdx = _getNoteIdx(id)
     notes[noteIdx].isNotePinned = !notes[noteIdx].isNotePinned
-    if (notes[noteIdx].details.color = "lightpink"){
+    if (notes[noteIdx].details.color = "pink"){
         notes[noteIdx].details.color = "white"
-    } if (notes[noteIdx].details.color = "white"){
-        notes[noteIdx].details.color = "lightpink"
+    } else {
+        notes[noteIdx].details.color = "pink"
     }
+    
     storageService.saveToStorage(NOTES_KEY, notes)
     return Promise.resolve()
 }
