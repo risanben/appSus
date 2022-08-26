@@ -1,40 +1,37 @@
 import { mailService } from '../services/mail.service.js'
+import { eventBusService } from '../../../services/event-bus.service.js'
 
 export class MailEdit extends React.Component {
+    unsubscribe
     state = {
         mail: {
-            subject: '',
-            body: '',
-            to: '',
-            status: '',
+            subject: this.props.mail.subject || '',
+            body: this.props.mail.body || '',
+            to: this.props.mail.to || '',
+            status: this.props.mail.status || '',
         },
-        // edit:{
-        //     isNew: true   // new or draft
-        // }
+
     }
 
     componentDidMount() {
-        console.log('MailEdit-componentDidMount', this.props);
-        this.loadMail()
+        // console.log('MailEdit-componentDidMount', this.props);
+        // this.loadMail()
+        this.unsubscribe = eventBusService.on('send-mail', (mail) => {
+            this.setState({ mail })
+        })
     }
 
-    // componentDidMount() {
-    //     this.unsubscribe = eventBusService.on('show-user-msg', (msg) => {
-    //       this.setState({ msg })
-    //       setTimeout(this.closeMsg, 3000)
-    //     })
-    //   }
-
-    //   componentWillUnmount() {
+    // componentWillUnmount() {
     //     this.unsubscribe()
-    //   }
+    // }
 
-
+    // ------------------------------------------------------------
     loadMail = () => {
         const { mailId } = this.props.match.params
         if (!mailId) return
         mailService.getById(mailId).then(mail => this.setState({ mail }))
     }
+    // ------------------------------------------------------------
 
     handleChange = ({ target }) => {
         const field = target.name
@@ -55,9 +52,11 @@ export class MailEdit extends React.Component {
 
     onSaveMail = (ev) => {
         ev.preventDefault()
+        debugger
         mailService.save(this.state.mail)
             .then(() => {
-                this.props.history.push('/mail')
+                // this.props.history.push('/mail')
+                this.props.onFinishEdit()
             })
     }
 
@@ -65,21 +64,21 @@ export class MailEdit extends React.Component {
     //     return /\S+@\S+\.\S+/.test(email)
     // }
 
-    onGoBack = () => {
-        this.props.history.push('/mail')
-    }
+    // onGoBack = () => {
+    //     this.props.history.push('/mail')
+    // }
 
     render() {
         const { subject, body, to } = this.state.mail
         return <section className="mail-edit">
             <header className="header">
-                <button className="btn" onClick={this.onGoBack}>X</button>
+                <button className="btn" onClick={()=>this.props.onFinishEdit()}>X</button>
             </header>
             <form className="flex column align-center" onSubmit={this.onSaveMail}>
 
                 {/* <label htmlFor="to">to</label> */}
                 <input type="mail" name="to"
-                className="txt to"
+                    className="txt to"
                     value={to} id="to"
                     placeholder="To.."
                     onChange={this.handleChange}
@@ -87,7 +86,7 @@ export class MailEdit extends React.Component {
 
                 {/* <label htmlFor="subject">subject</label> */}
                 <input type="text" name="subject"
-                 className="txt subject"
+                    className="txt subject"
                     value={subject} id="subject"
                     placeholder="subject..."
                     onChange={this.handleChange}
@@ -95,7 +94,7 @@ export class MailEdit extends React.Component {
 
                 {/* <label htmlFor="body">body</label> */}
                 <input type="text" name="body"
-                className="txt body"
+                    className="txt body"
                     value={body} id="body"
                     onChange={this.handleChange}
                 />

@@ -11,6 +11,7 @@ export class MailApp extends React.Component {
     state = {
         mails: [],
         filterBy: null,
+        // isOpenEditWindow: false,
     }
 
     componentDidMount() {
@@ -59,15 +60,20 @@ export class MailApp extends React.Component {
     //     this.setState({ filterBy }, this.loadMails)
     // }
 
+
+    onNewMail = () => {
+        this.setState({ isOpenEditWindow: true })
+    }
+
     render() {
         const { mails } = this.state
         const len = mails.length
-        const { onSetFilter, onRemoveMail, onStaredMail, onFilterChange } = this
+        const { onSetFilter, onRemoveMail, onStaredMail, onFilterChange, onNewMail } = this
         return <div className="mail-app">
-            <MailHeader numOfMailToDisplay={len} onSetFilter={onSetFilter} />
+            <MailHeader numOfMailToDisplay={len} onSetFilter={onSetFilter} onNewMail={onNewMail} />
             <MailFilter onSetFilter={onSetFilter} sideOrUp={'side'} /*onFilterChange={onFilterChange}*/ />
             <MailList mails={mails} onRemoveMail={onRemoveMail} onStaredMail={onStaredMail} />
-            {/* <MailEdit /> */}
+            {/* {this.state.isOpenEditWindow && <MailEdit mail={} />} */}
         </div>
     }
 }

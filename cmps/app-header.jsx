@@ -1,3 +1,5 @@
+import { MailEdit } from '../apps/mail/views/mail-edit.jsx'
+import { NoteApp } from '../apps/note/views/note-app.jsx'
 import { UserMsg } from './user-msg.jsx'
 
 const { Link, NavLink, withRouter } = ReactRouterDOM

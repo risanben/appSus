@@ -4,7 +4,7 @@ import { eventBusService } from '../services/event-bus.service.js'
 export class UserMsg extends React.Component {
   unsubscribe
   state = {
-    msg: null
+    msg: null,
   }
 
   componentDidMount() {
