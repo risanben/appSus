@@ -19,11 +19,6 @@ export class NoteApp extends React.Component {
     this.loadNotes()
   }
 
-  // componentWillUnmount() {
-  //     this.unsubscribe()
-  // }
-
-
   loadNotes() {
     const { filterBy } = this.state
     NoteService.query(filterBy)
