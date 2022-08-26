@@ -40,7 +40,6 @@ export class MailDetails extends React.Component {
             isShown: true
         }))
 
-        // console.log(isShown);
     }
 
     onFinishEdit = () => {

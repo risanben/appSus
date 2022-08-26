@@ -1,3 +1,4 @@
+import { MailCompose } from '../apps/mail/cmps/mail-compose.jsx'
 import { MailEdit } from '../apps/mail/views/mail-edit.jsx'
 import { NoteApp } from '../apps/note/views/note-app.jsx'
 import { UserMsg } from './user-msg.jsx'
@@ -17,6 +18,7 @@ export function AppHeader() {
             </div>
         </Link>
         <UserMsg />
+        {/* <MailCompose/> */}
         <nav>
             <NavLink exact to="/">Home</NavLink>
             <NavLink to="/about">About</NavLink>

@@ -1,5 +1,7 @@
 import { TodoPreview } from "../cmps/note-todo-preview.jsx"
 import { eventBusService } from "../../../services/event-bus.service.js";
+const { Link, NavLink, withRouter } = ReactRouterDOM
+
 export class NotePreview extends React.Component {
 
 
@@ -16,7 +18,7 @@ export class NotePreview extends React.Component {
             {note.type === 'text' && <div>{`${note.details.txt}`}</div>}
             {note.type === 'image' && <img className="note-img" src={note.details.txt} />}
             {note.type === 'video' && <video className="note-vid" src={note.details.txt} controls autoPlay></video>}
-            {note.type === 'todo' && < TodoPreview note={note}/>}
+            {note.type === 'todo' && < TodoPreview note={note} />}
             {note.type === 'audio' && <audio ref="audio_tag" src={note.details.txt} controls />}
 
             <div className="note-btns-container">
@@ -27,6 +29,7 @@ export class NotePreview extends React.Component {
                 </label>
                 <img src="assets/img/icons/pencil.png" onClick={() => handleNote(note)} title="Edit" className="note-btn" alt="" />
                 <img src="assets/img/icons/pin-icon.png" onClick={() => onPinNote(note.id)} title="Pin" className="note-btn" alt="" />
+                <Link to={`/mail/compose/${note.details.txt}`}>Send as mail</Link>
             </div>
         </section>
     }

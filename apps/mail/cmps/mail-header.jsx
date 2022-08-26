@@ -1,5 +1,6 @@
 import { MailFilter } from "../cmps/mail-Filter.jsx"
 import { MailEdit } from "../views/mail-edit.jsx"
+import { MailCompose } from "./mail-compose.jsx"
 const { Link, NavLink, withRouter } = ReactRouterDOM
 
 export class MailHeader extends React.Component {
@@ -19,7 +20,7 @@ export class MailHeader extends React.Component {
             isShown: true
         }))
 
-        // console.log(isShown);
+
     }
 
     onFinishEdit = () => {
@@ -35,9 +36,10 @@ export class MailHeader extends React.Component {
         return <header className="mail-header">
             {/* <Link to="/mail/edit"> */}
             <div onClick={() => setEditDisplay()}>{/*<MailEdit />*/}🖌compose</div>
-            {isShown && <MailEdit mail={mail} onFinishEdit={onFinishEdit} />} 
+            {isShown && <MailEdit mail={mail} onFinishEdit={onFinishEdit} />}
             {/* </Link> */}
             <MailFilter onSetFilter={onSetFilter} sideOrUp={'up'} />
+            <Link to={`/mail/compose`}></Link>
             <span className="mail-count">{`Displays ${numOfMailToDisplay} mail${numOfMailToDisplay > 1 ? 's' : ''}`}</span>
         </header>
     }

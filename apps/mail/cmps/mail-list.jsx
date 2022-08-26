@@ -3,7 +3,7 @@ import { mailService } from '../services/mail.service.js'
 
 const { Link } = ReactRouterDOM
 
-export function MailList({ mails, onRemoveMail, onStaredMail }) {
+export function MailList({ mails, onRemoveMail, onStaredMail, onTrashMail }) {
 
   return <section className="mail-list">
     <table /*border="1"*/>
@@ -31,12 +31,14 @@ export function MailList({ mails, onRemoveMail, onStaredMail }) {
                 mail={mail} />
             </td>
             <td>
-              date
+              {mail.fDate}
             </td>
             {/* </React.Fragment>
             </Link> */}
             <td>
-              <button onClick={() => onRemoveMail(mail.id)}>X</button>
+              {mail.status==='trash'?
+               <button onClick={() => onRemoveMail(mail.id)}>Delete forever</button>
+              :<button onClick={() => onTrashMail(mail)}>X</button>}
             </td>
           </tr>
         )}

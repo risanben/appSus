@@ -36,7 +36,7 @@ export class NoteEdit extends React.Component {
       <div className="note-edit-btns-container">
         <img src="assets/img/icons/save-icon.png" title="save" onClick={this.onUpdateNote} alt="" />
         <img src="assets/img/icons/go-back.png" title="back" onClick={onGoBack} alt="" />
-        <button onClick={this.onSendingMail}>send mail</button>
+        {/* <button onClick={this.onSendingMail}>send mail</button> */}
       </div>
     </div>
   }

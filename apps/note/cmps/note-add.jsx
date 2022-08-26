@@ -54,7 +54,6 @@ export class NoteAdd extends React.Component {
                     const audioBlob = new Blob(audioChunks);
                     const audioUrl = URL.createObjectURL(audioBlob);
                     this.record.recordingUrl = audioUrl
-                    // console.log('this.record.recordingUrl:', this.record.recordingUrl)
                 });
 
                 setTimeout(() => {

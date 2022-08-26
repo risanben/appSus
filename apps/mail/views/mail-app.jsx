@@ -6,23 +6,28 @@ import { MailEdit } from "./mail-edit.jsx"
 import { mailService } from '../services/mail.service.js'
 
 import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
+import { MailBooleanFilter } from '../cmps/mail-Boolean-filter.jsx'
 
 export class MailApp extends React.Component {
     state = {
         mails: [],
-        filterBy: null,
+        filterBy: {
+            subject: '',
+            status: 'inbox',
+            isRead: false,
+            isStared: false,
+            isFiltered: false,
+        },
         // isOpenEditWindow: false,
     }
 
     componentDidMount() {
-        console.log('MailApp-componentDidMount');
         this.loadMails()
     }
 
     loadMails = () => {
         mailService.query(this.state.filterBy)
             .then(mails => {
-                console.log(mails)
                 this.setState({ mails })
             })
             .catch(err => {
@@ -31,20 +36,46 @@ export class MailApp extends React.Component {
     }
 
     onSetFilter = (filterBy) => {
-        console.log('filterBy-mail APP', filterBy);
         this.setState({ filterBy }, this.loadMails)
     }
+
+    // onreadOrUnread = ({ isRead }) => {
+    //     console.log('isRead',isRead);
+    //     mailService.readOrUnread(this.state.mails, isRead)
+    //         .then(mails => {
+    //             console.log(mails)
+    //             this.setState({ mails })
+    //         })
+    //         .catch(err => {
+    //             showErrorMsg('No search results were found')
+    //         })
+    // }
 
     onRemoveMail = (mailId) => {
         mailService.remove(mailId)
             .then(() => {
                 const mails = this.state.mails.filter(mail => mail.id !== mailId)
                 this.setState({ mails })
-                showSuccessMsg('mail removed')
+                showSuccessMsg('Email is permanently deleted')
             })
             .catch(err => {
                 showErrorMsg('Cannot remove mail')
             })
+    }
+
+    onTrashMail = (mailToUpdate) => {
+        // debugger
+        mailToUpdate.status = 'trash'
+        mailService.update(mailToUpdate)
+            .then(() => {
+                const mails = this.state.mails.map(mail => mail.id === mailToUpdate.id ? mailToUpdate : mail)
+                this.setState({ mails })
+                showSuccessMsg('Mail move to trash')
+            })
+            .catch(err => {
+                showErrorMsg('Cannot move mail')
+            })
+
     }
 
     onStaredMail = (mailToUpdate) => {
@@ -68,12 +99,13 @@ export class MailApp extends React.Component {
     render() {
         const { mails } = this.state
         const len = mails.length
-        const { onSetFilter, onRemoveMail, onStaredMail, onFilterChange, onNewMail } = this
+        const { onSetFilter, onRemoveMail, onStaredMail, onFilterChange, onNewMail, onTrashMail, onreadOrUnread } = this
         return <div className="mail-app">
             <MailHeader numOfMailToDisplay={len} onSetFilter={onSetFilter} onNewMail={onNewMail} />
             <MailFilter onSetFilter={onSetFilter} sideOrUp={'side'} /*onFilterChange={onFilterChange}*/ />
-            <MailList mails={mails} onRemoveMail={onRemoveMail} onStaredMail={onStaredMail} />
+            <MailList mails={mails} onTrashMail={onTrashMail} onStaredMail={onStaredMail} onRemoveMail={onRemoveMail} />
             {/* {this.state.isOpenEditWindow && <MailEdit mail={} />} */}
+            {/* <MailBooleanFilter onreadOrUnread={onreadOrUnread} /> */}
         </div>
     }
 }

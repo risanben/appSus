@@ -7,6 +7,7 @@ export const mailService = {
     save,
     remove,
     update,
+    readOrUnread,
 
 }
 
@@ -19,6 +20,7 @@ export const mailService = {
 //     to: 'momo@momo.com'
 //     from:.....
 //     status: 'inbox/sent/trash/draft'
+// formatDate:,,
 //
 // }
 
@@ -42,8 +44,6 @@ const DRAFTKEY = 'draftDB'
 
 
 function query(filterBy) {
-    console.log('mailService-query-filterBy', filterBy);
-
     let mails = _loadFromStorage(MAINKEY)
     if (!mails) {
         mails = _createMails()
@@ -57,14 +57,13 @@ function query(filterBy) {
                 mail.isStared === isStared
             ))
         } else if (status) {
-            console.log('status', status);
             mails = mails.filter(mail => (
                 mail.status === status
             ))
-            if (status === 'trash') {
-                mails = _loadFromStorage(TRASHKEY)
-                if (mails) return Promise.resolve(mails)
-            }
+            // if (status === 'trash') {
+            //     mails = _loadFromStorage(TRASHKEY)
+            //     if (mails) return Promise.resolve(mails)
+            // }
         }
 
         if (mails) {
@@ -72,28 +71,38 @@ function query(filterBy) {
                 (mail.subject.includes(subject) ||
                     mail.body.includes(subject))
             ))
-            
-            console.log(mails);
+
             return Promise.resolve(mails)
         } else {
             return Promise.reject('No search results were found')
         }
 
     }
-    console.log('query mails-', mails);
+    return Promise.resolve(mails)
+}
+
+function readOrUnread( isRead) {
+    let mails = _loadFromStorage(MAINKEY)
+    console.log('isRead',isRead);
+    console.log('mails',mails);
+
+    if (!mails) return Promise.reject('No search results were found')
+    mails = mails.filter(mail => (
+        mail.isStared === isRead
+    ))
     return Promise.resolve(mails)
 }
 
 function remove(mailId) {
     let mails = _loadFromStorage(MAINKEY)
-    let removedMail = mails.filter(mail => mail.id === mailId)
+    // let removedMail = mails.filter(mail => mail.id === mailId)
     mails = mails.filter(mail => mail.id !== mailId)
     _saveToStorage(MAINKEY, mails)
     /*-----------------------------------------------*/
-    let removedMails = _loadFromStorage(TRASHKEY)
-    if (!removedMails) removedMails = []
-    removedMails.push(removedMail[0])
-    _saveToStorage(TRASHKEY, removedMails)
+    // let removedMails = _loadFromStorage(TRASHKEY)
+    // if (!removedMails) removedMails = []
+    // removedMails.push(removedMail[0])
+    // _saveToStorage(TRASHKEY, removedMails)
     /*-----------------------------------------------*/
     return Promise.resolve()
 }
@@ -107,24 +116,28 @@ function save(mail) {
 
 function _add({ subject, body, date = new Date(), to, status }) {
     let mails = _loadFromStorage(MAINKEY)
-    const mail = _createMail(subject, body, date, to, 'user@appsus.com', status)
+    let fDate = formatDate(date)
+    const mail = _createMail(subject, body, date, to, 'user@appsus.com', status, fDate)
     mails = [mail, ...mails]
     _saveToStorage(MAINKEY, mails)
     return Promise.resolve(mail)
 }
 
+function formatDate(date) {
+    let monthName = utilService.getMonthName(date).substring(0, 3)
+    let dayInMonth = date.getDate()
+    let fDate = `${monthName} ${dayInMonth}`
+    return fDate
+}
+
 function update(mailToUpdate) {
     let mails = _loadFromStorage(MAINKEY)
     mails = mails.map(mail => mail.id === mailToUpdate.id ? mailToUpdate : mail)
-
-    console.log('service update-mails', mails);
-    console.log('service update-mailToUpdate', mailToUpdate);
     _saveToStorage(MAINKEY, mails)
     return Promise.resolve(mailToUpdate)
 }
 
-function _createMail(subject = utilService.makeLorem(3), body = utilService.makeLorem(50), date = utilService.getRandomIntInclusive(13), to = getMailAdders(), from = getMailAdders(), status = (from === 'user@appsus.com' ? 'sent' : 'inbox')) {
-
+function _createMail(subject = utilService.makeLorem(3), body = utilService.makeLorem(50), date = utilService.getRandomIntInclusive(13), to = getMailAdders(), from = getMailAdders(), status = (from === 'user@appsus.com' ? 'sent' : 'inbox'), fDate) {
     return {
         id: utilService.makeId(),
         subject,
@@ -133,7 +146,8 @@ function _createMail(subject = utilService.makeLorem(3), body = utilService.make
         sentAt: date,
         to,
         from,
-        status
+        status,
+        fDate,
     }
 }
 

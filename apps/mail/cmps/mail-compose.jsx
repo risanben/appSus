@@ -1,47 +1,50 @@
 import { mailService } from '../services/mail.service.js'
 import { eventBusService } from '../../../services/event-bus.service.js'
 
-export class MailEdit extends React.Component {
-    // unsubscribe
+export class MailCompose extends React.Component {
+    unsubscribe
     state = {
         mail: {
-            subject: this.props.mail.subject || '',
-            body: this.props.mail.body || '',
-            to: this.props.mail.to || '',
-            status: this.props.mail.status || '',
+            subject: '',
+            body: '',
+            to: '',
+            status: '',
         },
 
     }
 
     componentDidMount() {
-        // this.loadMail()
-        // this.unsubscribe = eventBusService.on('send-mail', (mail) => {
-        //     this.setState({ mail })
-        // })
+        this.loadMail()
+        this.unsubscribe = eventBusService.on('send-mail', (mail) => {
+            this.setState({ mail })
+        })
     }
 
     // componentWillUnmount() {
     //     this.unsubscribe()
     // }
 
-    // ------------------------------------------------------------
+
     loadMail = () => {
-        const { mailId } = this.props.match.params
-        if (!mailId) return
-        mailService.getById(mailId).then(mail => this.setState({ mail }))
+        // if (!this.props.match.params)return<span></span>
+        const { body } = this.props.match.params
+        console.log('body', body);
+        // if (!body) return<span></span>
+        //  mailService.getById(mailId).then(mail => this.setState({ mail }))
+
+        this.setState((prevState) => ({
+            mail: {
+                ...prevState.mail,
+                body: body,
+                subject: 'mail from my note',
+            }
+        }))
     }
-    // ------------------------------------------------------------
 
     handleChange = ({ target }) => {
         const field = target.name
         const value = target.value
-        console.log('field', field, 'value', value);
-        // let value = ''
-        // if (field === 'to') {
-        //     value = isValidEmail(email) ? target.value : alert('Please enter valid email')
-        // } else {
-        //     value = target.value
-        // }
+
         this.setState((prevState) => ({
             mail: {
                 ...prevState.mail,
@@ -55,28 +58,20 @@ export class MailEdit extends React.Component {
         console.log(ev);
         mailService.save(this.state.mail)
             .then(() => {
-                // this.props.history.push('/mail')
-                this.props.onFinishEdit()
+                this.props.history.push('/mail')
+                // this.props.onFinishEdit()
             })
     }
 
-    // isValidEmail(email) {
-    //     return /\S+@\S+\.\S+/.test(email)
-    // }
-
-    // onGoBack = () => {
-    //     this.props.history.push('/mail')
-    // }
-
     render() {
         const { subject, body, to } = this.state.mail
+        if (!body) return <span></span>
         return <section className="mail-edit">
             <header className="header">
                 <button className="btn" onClick={() => this.props.onFinishEdit()}>X</button>
             </header>
             <form className="flex column align-center" onSubmit={this.onSaveMail}>
 
-                {/* <label htmlFor="to">to</label> */}
                 <input type="mail" name="to"
                     className="txt to"
                     value={to} id="to"
@@ -84,7 +79,6 @@ export class MailEdit extends React.Component {
                     onChange={this.handleChange}
                 />
 
-                {/* <label htmlFor="subject">subject</label> */}
                 <input type="text" name="subject"
                     className="txt subject"
                     value={subject} id="subject"
@@ -92,13 +86,11 @@ export class MailEdit extends React.Component {
                     onChange={this.handleChange}
                 />
 
-                {/* <label htmlFor="body">body</label> */}
                 <input type="text" name="body"
                     className="txt body"
                     value={body} id="body"
                     onChange={this.handleChange}
                 />
-
 
 
                 {/* <button value={'draft'} name="status" onClick={this.handleChange}>Save</button> */}

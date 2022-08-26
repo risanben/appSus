@@ -21,15 +21,12 @@ export class MailFilter extends React.Component {
         // const value = target.name === 'isRead' ? +(target.value) : target.value
         // const value = target.value
         if (field === 'isRead' || field === 'isStared' || field === 'isFiltered') {
-            console.log(field);
             value = target.value === 'true' ? false : true
             // } else if (field === 'isStared') {
             //     value = target.value === 'true' ? true : false
-            //     console.log('value', value);
         } else {
             value = target.value
         }
-        console.log('handleChange-target.field, target.value', field, value);
 
         this.setState((prevState) => ({
             filterBy: {
@@ -50,7 +47,7 @@ export class MailFilter extends React.Component {
         this.setState(() => ({
             filterBy: {
                 subject: '',
-                status: '',
+                status: 'inbox',
                 isRead: false,
                 isStared: false,
             }
