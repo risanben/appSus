@@ -9,19 +9,15 @@ import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.servic
 // import { eventBusService } from '../../../services/event-bus.service.js'
 
 export class NoteApp extends React.Component {
-  unsubscribe
   state = {
     notes: null,
     filterBy: null,
     selectedNote: null,
   }
 
-  // componentDidMount() {
-  //   this.loadNotes()
-  //   this.unsubscribe = eventBusService.on('mail-to-note', (text) => {
-  //     this.setState({ text })
-  //   })
-  // }
+  componentDidMount() {
+    this.loadNotes()
+  }
 
   // componentWillUnmount() {
   //     this.unsubscribe()
