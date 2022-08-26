@@ -29,7 +29,6 @@ export class UserMsg extends React.Component {
     if (!msg) return <span></span>
     return (
       <section className={'user-msg ' + msg.type}>
-        <button onClick={closeMsg}>x</button>
         {msg.txt}
       </section>
     )

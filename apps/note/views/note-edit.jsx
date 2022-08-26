@@ -17,17 +17,6 @@ export class NoteEdit extends React.Component {
     this.props.updateNote(id, text)
   }
 
-  onSendingMail = () => {
-    // debugger
-    const mail = {
-      subject: 'From my notes',
-      body: this.state.text,
-      to: '',
-      status: '',
-    }
-    sendMail(mail)
-  }
-
   render() {
     const { note, onGoBack } = this.props
 
@@ -36,7 +25,6 @@ export class NoteEdit extends React.Component {
       <div className="note-edit-btns-container">
         <img src="assets/img/icons/save-icon.png" title="save" onClick={this.onUpdateNote} alt="" />
         <img src="assets/img/icons/go-back.png" title="back" onClick={onGoBack} alt="" />
-        {/* <button onClick={this.onSendingMail}>send mail</button> */}
       </div>
     </div>
   }
