@@ -1,12 +1,10 @@
-import { sendMail } from '../../../services/event-bus.service.js'
+import { sendMail, eventBusService } from '../../../services/event-bus.service.js'
 
 export class NoteEdit extends React.Component {
 
   state = {
     text: this.props.note.details.txt,
   }
-
-
 
   onChangeText = ({ target }) => {
     const text = target.value
@@ -20,7 +18,7 @@ export class NoteEdit extends React.Component {
   }
 
   onSendingMail = () => {
-
+    // debugger
     const mail = {
       subject: 'From my notes',
       body: this.state.text,
@@ -32,7 +30,6 @@ export class NoteEdit extends React.Component {
 
   render() {
     const { note, onGoBack } = this.props
-
 
     return <div className="note-edit">
       {<textarea value={this.state.text} onChange={this.onChangeText}></textarea>}

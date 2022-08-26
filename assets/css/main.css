@@ -35,3 +35,4 @@
 @import './apps/note/cmps/note-add.css';
 @import './apps/note/cmps/note-edit.css';
 @import './apps/note/cmps/pinned-note-list.css';
+@import './apps/note/cmps/note-mq.css';

@@ -1,0 +1,17 @@
+
+@media (max-width: 600px) {
+
+    .note-filter{
+        border: 2px orange solid;
+        flex-direction: row;
+        flex-grow: 10;
+       
+    }
+    .note-filter div {
+border: 2px red solid;
+    }
+
+    .note-add{
+        margin-top: 100px;
+    }
+}

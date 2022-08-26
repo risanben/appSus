@@ -23,7 +23,6 @@ export class NoteApp extends React.Component {
     const { filterBy } = this.state
     NoteService.query(filterBy)
       .then(notes => this.setState({ notes }))
-
   }
 
   onFilterChange = (filterBy) => {
