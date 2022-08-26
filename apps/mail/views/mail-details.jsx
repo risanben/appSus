@@ -43,7 +43,7 @@ export class MailDetails extends React.Component {
             {<hr></hr>}
             <h3>{mail.body}</h3>
             <button onClick={this.onGoBack}>Back</button>
-
+            <Link to={`/mail/edit/${mail.id}`}>Edit</Link>
         </section>
     }
 }

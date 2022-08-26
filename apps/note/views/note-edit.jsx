@@ -1,3 +1,4 @@
+import { sendMail } from '../../../services/event-bus.service.js'
 
 export class NoteEdit extends React.Component {
 
@@ -18,16 +19,27 @@ export class NoteEdit extends React.Component {
     this.props.updateNote(id, text)
   }
 
+  onSendingMail = () => {
+
+    const mail = {
+      subject: 'From my notes',
+      body: this.state.text,
+      to: '',
+      status: '',
+    }
+    sendMail(mail)
+  }
 
   render() {
-    const { note,onGoBack } = this.props
+    const { note, onGoBack } = this.props
 
 
     return <div className="note-edit">
       {<textarea value={this.state.text} onChange={this.onChangeText}></textarea>}
       <div className="note-edit-btns-container">
-        <img src="assets/img/icons/save-icon.png" title="save"onClick={this.onUpdateNote} alt="" />
-        <img src="assets/img/icons/go-back.png" title="back"onClick={onGoBack}alt="" />
+        <img src="assets/img/icons/save-icon.png" title="save" onClick={this.onUpdateNote} alt="" />
+        <img src="assets/img/icons/go-back.png" title="back" onClick={onGoBack} alt="" />
+        <button onClick={this.onSendingMail}>send mail</button>
       </div>
     </div>
   }

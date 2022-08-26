@@ -22,6 +22,10 @@ export function showUserMsg(msg) {
     eventBusService.emit('show-user-msg', msg)
 }
 
+export function sendMail(mail) {
+    eventBusService.emit('send-mail', mail)
+}
+
 export function mailEditWindow(msg) {
     eventBusService.emit('show-edit-window', msg)
 }
