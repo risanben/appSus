@@ -1,4 +1,5 @@
 import { TodoPreview } from "../cmps/note-todo-preview.jsx"
+import { eventBusService } from "../../../services/event-bus.service.js";
 export class NotePreview extends React.Component {
 
 
@@ -7,17 +8,6 @@ export class NotePreview extends React.Component {
         const id = target.name
         this.props.onColorChange(id, color)
     }
-    // getRenderLine = (note)=> {
-
-    //     switch (note.type) {
-    //         case 'text':
-    //             return <div>{note.details.txt}</div>;
-    //         case 'image':
-    //             return <img src={note.details.txt}/>;
-    //         case 'todo':
-    //             return  `<div> {${note.details.txt}} </div>`;
-    //    }
-    // }
 
     render() {
         const { note, onRemoveNote, handleNote, onPinNote } = this.props
