@@ -20,9 +20,11 @@ export function MailList({ mails, onRemoveMail, onStaredMail }) {
             </td>
             {/* <Link to={"/mail/" + mail.id}>
               <React.Fragment> */}
+
             <td>
-            <Link to={"/mail/" + mail.id}>{mail.from} </Link>
+              <Link to={"/mail/" + mail.id}>{mail.from} </Link>
             </td>
+
             <td>
               <MailPreview
                 key={mail.id}
