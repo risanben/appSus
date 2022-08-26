@@ -1,0 +1,26 @@
+
+
+.about{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 3px solid green; */
+    min-height: 88vh;
+}
+.about-circle{
+    background-color: rgba(255, 192, 203, 0.497);
+    height: 350px;
+    width: 350px;
+    border-radius: 50%;
+}
+
+.small-circle{
+    background-color:rgba(173, 216, 230, 0.51);
+    height: 300px;
+    width: 300px;
+    border-radius: 50%;
+    position: relative;
+    left: 160px;
+    top: 100px;
+}

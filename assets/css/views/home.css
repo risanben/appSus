@@ -1,6 +1,4 @@
 .home {
-    display: flex;
-    flex-direction: column;
     min-height: 88vh;
     background-image: url(../../img/home-bg.jpg);
     background-size: cover;
@@ -10,37 +8,50 @@
 
 
 .home-main-content {
-    font-family: lato;
-    /* font-style: italic; */
+    opacity: 100%;
+    font-family: lato-bold;
     position: absolute;
-    top: 20%;
-    align-self: center;
+    top: 43%;
+    left: 7%;
     margin-left: 20px;
-    margin-right: 20px;
-
-    -webkit-text-stroke: 1px black; 
-
-    
+    margin-right: 20px;   
+    /* background-color: rgba(203, 221, 237, 0.89);  */
+    border-radius: 20px;
+    padding: 20px;
 }
 
 .home-main-content h1{
     font-size: 2.5rem;
 }
+.home-main-content h4{
+    font-family: lato-bold;
+    font-size: 17px;
+}
 
-.explore-btn{
-    border-radius: 5rem;
-    border: 1px solid rgba(0, 0, 0, 0.612);
-    color: rgba(0, 0, 0, 0.556);
-    font-size: 1rem;
-    background-color: rgb(214, 214, 237);
-    padding: 10px;
-    cursor: pointer;
-}
-.explore-btn:hover{
-    color: black;
-    border: 1px solid rgba(0, 0, 0, 0.94);
-}
 
 .explore-container{
-   
+    background-color: rgb(206, 225, 239);
+    padding: 5px;
+    border-radius: 10px;
+    font-family: lato;
+}
+
+.explore-container ul li span{
+    font-family: lato-bold;
+    font-size: 14px;
+}
+.usage-cont{
+    background-color: rgb(206, 225, 239);
+    padding: 5px;
+    border-radius: 10px;
+    font-family: lato;
+}
+
+/* MQ  */
+
+@media (max-width: 600px) {
+
+    .home-main-content{
+        top: 10%;
+    }
 }
