@@ -22,7 +22,7 @@ export class MailHeader extends React.Component {
         // console.log(isShown);
     }
 
-    onGoBack = () => {
+    onFinishEdit = () => {
         this.setState(() => ({
             isShown: false
         }))
@@ -30,12 +30,12 @@ export class MailHeader extends React.Component {
 
     render() {
         const { isShown, mail } = this.state
-        const { setEditDisplay, onGoBack } = this
+        const { setEditDisplay, onFinishEdit } = this
         const { numOfMailToDisplay, onSetFilter, onNewMail } = this.props
         return <header className="mail-header">
             {/* <Link to="/mail/edit"> */}
             <div onClick={() => setEditDisplay()}>{/*<MailEdit />*/}🖌compose</div>
-            {isShown && <MailEdit mail={mail} onGoBack={onGoBack} />}
+            {isShown && <MailEdit mail={mail} onFinishEdit={onFinishEdit} />} 
             {/* </Link> */}
             <MailFilter onSetFilter={onSetFilter} sideOrUp={'up'} />
             <span className="mail-count">{`Displays ${numOfMailToDisplay} mail${numOfMailToDisplay > 1 ? 's' : ''}`}</span>

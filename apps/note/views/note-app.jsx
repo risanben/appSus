@@ -6,18 +6,27 @@ import { NoteService } from "../services/note.service.js"
 import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js';
 
 
-export class NoteApp extends React.Component {
+// import { eventBusService } from '../../../services/event-bus.service.js'
 
+export class NoteApp extends React.Component {
+  unsubscribe
   state = {
     notes: null,
     filterBy: null,
     selectedNote: null,
   }
 
+  // componentDidMount() {
+  //   this.loadNotes()
+  //   this.unsubscribe = eventBusService.on('mail-to-note', (text) => {
+  //     this.setState({ text })
+  //   })
+  // }
 
-  componentDidMount() {
-    this.loadNotes()
-  }
+  // componentWillUnmount() {
+  //     this.unsubscribe()
+  // }
+
 
   loadNotes() {
     const { filterBy } = this.state
@@ -33,7 +42,7 @@ export class NoteApp extends React.Component {
     NoteService.removeNote(id)
       .then(this.loadNotes())
       .then(showSuccessMsg('Note removed'))
-      
+
 
   }
 
@@ -50,7 +59,7 @@ export class NoteApp extends React.Component {
 
   onPinNote = (id) => {
     NoteService.togglePin(id)
-    .then(this.loadNotes())
+      .then(this.loadNotes())
     console.log('pin was toggled:')
   }
 
@@ -72,13 +81,12 @@ export class NoteApp extends React.Component {
   }
   render() {
     const { notes, selectedNote } = this.state
-
     return <section className="note-app">
       <NoteFilter onFilterChange={this.onFilterChange} />
       {selectedNote && <NoteEdit note={selectedNote} updateNote={this.updateNote} onGoBack={this.onGoBack} />}
       <div className="main-container">
         <NoteAdd onAddNote={this.onAddNote} />
-        <NoteList notes={notes}onPinNote={this.onPinNote} handleNote={this.handleNote} onRemoveNote={this.onRemoveNote} onColorChange={this.onColorChange} />
+        <NoteList notes={notes} onPinNote={this.onPinNote} handleNote={this.handleNote} onRemoveNote={this.onRemoveNote} onColorChange={this.onColorChange} />
       </div>
     </section>
   }

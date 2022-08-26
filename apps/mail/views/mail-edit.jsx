@@ -14,7 +14,7 @@ export class MailEdit extends React.Component {
     }
 
     componentDidMount() {
-        console.log('MailEdit-componentDidMount', this.props);
+        // console.log('MailEdit-componentDidMount', this.props);
         // this.loadMail()
         this.unsubscribe = eventBusService.on('send-mail', (mail) => {
             this.setState({ mail })
@@ -56,7 +56,7 @@ export class MailEdit extends React.Component {
         mailService.save(this.state.mail)
             .then(() => {
                 // this.props.history.push('/mail')
-                this.props.onGoBack()
+                this.props.onFinishEdit()
             })
     }
 
@@ -64,15 +64,15 @@ export class MailEdit extends React.Component {
     //     return /\S+@\S+\.\S+/.test(email)
     // }
 
-    onGoBack = () => {
-        this.props.history.push('/mail')
-    }
+    // onGoBack = () => {
+    //     this.props.history.push('/mail')
+    // }
 
     render() {
         const { subject, body, to } = this.state.mail
         return <section className="mail-edit">
             <header className="header">
-                <button className="btn" onClick={this.onGoBack}>X</button>
+                <button className="btn" onClick={()=>this.props.onFinishEdit()}>X</button>
             </header>
             <form className="flex column align-center" onSubmit={this.onSaveMail}>
 
