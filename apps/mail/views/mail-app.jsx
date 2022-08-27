@@ -1,8 +1,8 @@
 
 import { MailList } from '../cmps/mail-list.jsx'
-import { MailFilter } from "../cmps/mail-Filter.jsx"
-import { MailHeader } from "../cmps/mail-header.jsx"
-import { MailEdit } from "./mail-edit.jsx"
+import { MailFilter } from '../cmps/mail-Filter.jsx'
+import { MailHeader } from '../cmps/mail-header.jsx'
+import { MailEdit } from './mail-edit.jsx'
 import { mailService, gUnReadCounter } from '../services/mail.service.js'
 
 import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
@@ -18,9 +18,7 @@ export class MailApp extends React.Component {
             isRead: false,
             isStared: false,
             isFiltered: false,
-            // showListOrDetails: false,
         },
-        // isOpenEditWindow: false,
     }
 
     componentDidMount() {
@@ -42,18 +40,6 @@ export class MailApp extends React.Component {
         console.log(filterBy);
         this.setState({ filterBy }, this.loadMails)
     }
-
-    // onreadOrUnread = ({ isRead }) => {
-    //     console.log('isRead',isRead);
-    //     mailService.readOrUnread(this.state.mails, isRead)
-    //         .then(mails => {
-    //             console.log(mails)
-    //             this.setState({ mails })
-    //         })
-    //         .catch(err => {
-    //             showErrorMsg('No search results were found')
-    //         })
-    // }
 
     onRemoveMail = (mailId) => {
         mailService.remove(mailId)
@@ -91,33 +77,17 @@ export class MailApp extends React.Component {
             })
     }
 
-    // onFilterChange = (filterBy) => {
-    //     this.setState({ filterBy }, this.loadMails)
-    // }
-
-
     onNewMail = () => {
         this.setState({ isOpenEditWindow: true })
     }
 
-    // ----------------------------------------------
-    // onListClick = () => {
-    //     isShown = !this.State.showListOrDetails
-
-    //     this.setState(() => ({
-    //         showListOrDetails: isShown
-    //     }))
-    // }
-
-    // ----------------------------------------------
-
     _onOpenFilters=()=>{
         const elFilters = document.querySelector('.mail-filter')
         console.log('elFilters:', elFilters)
-        if (elFilters.classList.contains("visible")){
-            elFilters.classList.remove("visible")
+        if (elFilters.classList.contains('visible')){
+            elFilters.classList.remove('visible')
         } else{
-            elFilters.classList.add("visible")
+            elFilters.classList.add('visible')
         }
     }
 
@@ -133,7 +103,7 @@ export class MailApp extends React.Component {
             <MailFilter onSetFilter={onSetFilter} sideOrUp={'side'} unReadCount={unReadCount} />
             <MailList mails={mails} onTrashMail={onTrashMail} onStaredMail={onStaredMail} onRemoveMail={onRemoveMail} /* onSetFilter={onSetFilter} sideOrUp={'side'} unReadCount={unReadCount}*/ />
     
-            {/* <MailBooleanFilter onSetFilter={onSetFilter} /> */}
+            <MailBooleanFilter onSetFilter={onSetFilter} />
         </div>
     }
 }

@@ -1,4 +1,4 @@
-import { LongText } from "../../../cmps/long-text.jsx"
+import { LongText } from '../../../cmps/long-text.jsx'
 
 const { Link } = ReactRouterDOM
 
@@ -12,7 +12,6 @@ export function MailPreview({ mail }) {
             <span className="subject" title={'Subject'}>{mail.subject}</span>
             <span className="body-preview" title={'Email body preview'}><LongText textLen={textLen} body={mail.body} /></span>
             <span>  {mail.fDate}  </span>
-            {/* <span>  to: {mail.to}</span> */}
         </article>
     </Link>
 }

@@ -12,44 +12,17 @@ export const mailService = {
 
 }
 
-// const mail = {
-//     id: 'e101',
-//     subject: 'Miss you!',
-//     body: 'Would love to catch up sometimes',
-//     isRead: false,
-//     sentAt : 1551133930594,
-//     to: 'momo@momo.com'
-//     from:.....
-//     status: 'inbox/sent/trash/draft'
-// formatDate:,,
-//
-// }
-
-const loggedinUser = {
-    email: 'user@appsus.com',
-    fullname: 'Mahatma Appsus'
-}
-
-const criteria = {
-    status: 'inbox/sent/trash/draft',
-    txt: 'puki', // no need to support complex text search 
-    isRead: true, // (optional property, if missing: show all) 
-    isStared: true, // (optional property, if missing: show all) 
-    lables: ['important', 'romantic'] // has any of the labels 
-}
-
-
 const MAINKEY = 'mailsDB'
-const TRASHKEY = 'trashDB'
-const DRAFTKEY = 'draftDB'
 export var gUnReadCounter
 
 function query(filterBy) {
     let mails = _loadFromStorage(MAINKEY)
     if (!mails) {
-        mails = _createMails()
+        // mails = _createMails()
+        mails = gMails
         _saveToStorage(MAINKEY, mails)
     }
+
     console.log('mails', mails);
     unReadCounter(mails)
     if (filterBy) {
@@ -59,6 +32,7 @@ function query(filterBy) {
             mails = mails.filter(mail => (
                 mail.isStared === isStared
             ))
+            console.log('mails', mails);
         }//if (isStared) 
         if (isRead) {
             mails = mails.filter(mail => (
@@ -74,8 +48,8 @@ function query(filterBy) {
         console.log('mails', mails);
         if (subject) {
             mails = mails.filter(mail => (
-                (mail.subject.includes(subject) ||
-                    mail.body.includes(subject))
+                (mail.subject.toLowerCase().includes(subject.toLowerCase()) ||
+                    mail.body.toLowerCase().includes(subject.toLowerCase()))
             ))
             console.log(mails);
 
@@ -109,15 +83,8 @@ function readOrUnread(isRead) {
 
 function remove(mailId) {
     let mails = _loadFromStorage(MAINKEY)
-    // let removedMail = mails.filter(mail => mail.id === mailId)
     mails = mails.filter(mail => mail.id !== mailId)
     _saveToStorage(MAINKEY, mails)
-    /*-----------------------------------------------*/
-    // let removedMails = _loadFromStorage(TRASHKEY)
-    // if (!removedMails) removedMails = []
-    // removedMails.push(removedMail[0])
-    // _saveToStorage(TRASHKEY, removedMails)
-    /*-----------------------------------------------*/
     return Promise.resolve()
 }
 
@@ -132,7 +99,6 @@ function _add({ subject, body, date = new Date(), to, status }) {
     console.log(status);
     let mails = _loadFromStorage(MAINKEY)
     let fDate = formatDate(date)
-    // console.log(subject,body,date,to,from,fromName,status,fDate);
     const mail = _createMail(subject, body, date, to, 'user@appsus.com', 'Me', status, fDate)
     mails = [mail, ...mails]
     _saveToStorage(MAINKEY, mails)
@@ -224,7 +190,6 @@ dateGen()
 function dateGen() {
     const intDate = utilService.getRandomIntInclusive(1640000000000, 1661900000000)
     const date = new Date(intDate)
-    // const date = new Date(1661900000000)
     const fDate = formatDate(date)
     return {
         date,
@@ -232,3 +197,120 @@ function dateGen() {
     }
 }
 
+const gMails = [
+    {
+        id: utilService.makeId(),
+        subject: 'Your project amazed me',
+        body: 'I was happy to come across your project, it really lifted my spirits and made my day',
+        isRead: false,
+        sentAt: dateGen().date,
+        to: 'user@appsus.com',
+        from: 'Yaron@appsus.com',
+        fromName: 'Yaron Biton',
+        status: 'inbox',
+        fDate: dateGen().fDate,
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'Outstanding Student Award',
+        body: 'I am happy to inform you that the Supreme Committee has decided to award you the Outstanding Student Award for 2022',
+        isRead: true,
+        sentAt: dateGen().date,
+        to: 'user@appsus.com',
+        from: 'Tommy@appsus.com',
+        fromName: 'Tommy Irmia',
+        status: 'inbox',
+        fDate: dateGen().fDate,
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'You have not used your subscription for two months',
+        body: 'Hello, after a data analysis, we discovered that you have not used your subscription at all in the last two months. We wanted to find out if your connection is working and if the content is to your liking',
+        isRead: false,
+        sentAt: dateGen().date,
+        to: 'user@appsus.com',
+        from: 'Netflix@appsus.com',
+        fromName: 'Netflix     ',
+        status: 'inbox',
+        fDate: dateGen().fDate,
+    },
+    {
+        id: utilService.makeId(),
+        subject: 'Your order has been launched',
+        body: 'Hello, your order is ready, in the next few minutes a courier will pick it up and bring you a wonderful pizza to your door',
+        isRead: false,
+        sentAt: dateGen().date,
+        to: 'user@appsus.com',
+        from: 'Dominos@appsus.com',
+        fromName: 'Dominos Pizza',
+        status: 'inbox',
+        fDate: dateGen().fDate,
+    },
+
+    {
+        id: utilService.makeId(),
+        subject: 'All day you\'re at the computer, I thought maybe that\'s how I\'ll get you',
+        body: 'End of August and your two daughters at home do you think you can take a few hours off to take them to the beach?',
+        isRead: true,
+        sentAt: dateGen().date,
+        to: 'user@appsus.com',
+        from: 'wife@appsus.com',
+        fromName: 'dear wife',
+        status: 'inbox',
+        fDate: dateGen().fDate,
+    },
+    {
+        id: utilService.makeId(),
+        subject: ' A first-party GitHub OAuth application has been added to your account',
+        body: 'A first-party GitHub OAuth application (Git Credential Manager) with gist, repo, and workflow scopes was recently authorized to access your account. Visit on our website for more information. Thanks, The GitHub Team',
+        isRead: false,
+        sentAt: dateGen().date,
+        to: 'user@appsus.com',
+        from: 'GitHub@appsus.com',
+        fromName: 'GitHub Team ',
+        status: 'inbox',
+        fDate: dateGen().fDate,
+    },
+
+    {
+        id: utilService.makeId(),
+        subject: 'Good night',
+        body: 'I\'m going to sleep, we\'ll continue tomorrow :)',
+        isRead: true,
+        sentAt: dateGen().date,
+        to: 'Team@appsus.com',
+        from: 'user@appsus.com',
+        fromName: 'Me     ',
+        status: 'sent',
+        fDate: dateGen().fDate,
+    },
+
+    {
+        id: utilService.makeId(),
+        subject: 'We\'re almost done',
+        body: 'almost',
+        isRead: true,
+        sentAt: dateGen().date,
+        to: 'Team@appsus.com',
+        from: 'user@appsus.com',
+        fromName: 'Me     ',
+        status: 'draft',
+        fDate: dateGen().fDate,
+    },
+
+    {
+        id: utilService.makeId(),
+        subject: 'We\'re almo......',
+        body: 'alost kff',
+        isRead: true,
+        sentAt: dateGen().date,
+        to: 'Team@appsus.com',
+        from: 'user@appsus.com',
+        fromName: 'Me     ',
+        status: 'trash',
+        fDate: dateGen().fDate,
+    },
+
+
+
+]

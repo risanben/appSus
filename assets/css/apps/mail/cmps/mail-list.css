@@ -1,6 +1,8 @@
 .mail-list {
+    grid-column: 2/-1;
+    grid-row: 2/-1;
     display: flex;
-    overflow-x:auto;
+    overflow-x: auto;
     /* border: 2px solid green; */
     /* padding: 5px; */
     background-color: var(--main-bg-color);
@@ -10,10 +12,10 @@
 .mail-list table {
     flex-grow: 1;
     border-collapse: collapse;
-    table-layout: fixed; 
+    table-layout: fixed;
     height: 40px;
-   
-    
+
+
 }
 
 /* .mail-list .table-link{
@@ -38,7 +40,7 @@ display: flex;
     max-height: 20px;
     padding-top: 10px;
     padding-bottom: 10px;
-    
+
 }
 
 .mail-list td {
@@ -53,7 +55,7 @@ display: flex;
 
 
 .mail-list .read {
-    background-color:  var(--read-bg-color);
+    background-color: var(--read-bg-color);
 }
 
 .mail-list .unread {

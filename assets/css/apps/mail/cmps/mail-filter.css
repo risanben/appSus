@@ -1,8 +1,8 @@
 .mail-filter {
     display: flex;
     flex-direction: column;
-    /* grid-column: 1/2; */
-    /* grid-row:3/4;   */
+    grid-column: 1/2;
+    grid-row:2/3;  
     background-color: var(--main-bg-color);
 }
 

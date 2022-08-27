@@ -3,7 +3,7 @@
     padding: 1em;
     position: absolute;
     bottom: 0;
-    right: 1em;
+    /* right: 1em; */
     min-width: 500px;
     min-height: 400px;
     border-radius: 15px;
@@ -11,16 +11,10 @@
     z-index: 10;
 }
 
-/* .mail-edit >* :not(.header){
-    border-radius: 15px;
-} */
-
 .mail-edit .header {
     border-top-right-radius: 15px;
     border-top-left-radius: 15px;
     position: relative;
-
-    /* top: 0;  */
 }
 
 .mail-edit .btn {

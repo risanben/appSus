@@ -16,12 +16,8 @@ export class MailFilter extends React.Component {
     handleChange = ({ target }) => {
         const field = target.name
         let value = ''
-        // const value = target.name === 'isRead' ? +(target.value) : target.value
-        // const value = target.value
         if (field === 'isRead' || field === 'isStared' || field === 'isFiltered') {
             value = target.value === 'true' ? false : true
-            // } else if (field === 'isStared') {
-            //     value = target.value === 'true' ? true : false
         } else {
             value = target.value
         }
@@ -56,19 +52,6 @@ export class MailFilter extends React.Component {
         })
     }
 
-    cleanFilter = () => {
-        this.setState(() => ({
-            filterBy: {
-                subject: '',
-                status: '',
-                isRead: false,
-                isStared: false,
-            }
-        }), () => {
-            this.props.onSetFilter(this.state.filterBy)
-        })
-    }
-
     render() {
         const { subject, status, isRead, isStared } = this.state.filterBy
         const { sideOrUp, unReadCount } = this.props
@@ -94,14 +77,6 @@ export class MailFilter extends React.Component {
                         onClick={this.cleanFilter}
                     > Show all </button></div>
 
-                    {/* <label htmlFor="by-clean-filter">
-                        <button
-                            id="by-clean-filter"
-                            name="status"
-                            value={''}
-                            onClick={this.cleanFilter}
-                        > Show all</button></label> */}
-
                     <div> <button
                         className="filter-btn inbox"
                         id="by-inbox"
@@ -118,14 +93,6 @@ export class MailFilter extends React.Component {
                         value={'sent'}
                         onClick={this.handleChange}
                     > <img className="filter-icon" src="assets/img/icons/sent-email.png" />Sent</button></div>
-{/* 
-                    <div><button
-                        className="filter-btn"
-                        id="by-star"
-                        name="isStared"
-                        value={isStared}
-                        onClick={this.handleChange}
-                    > <img className="filter-icon" src="assets/img/icons/star3.png" />Stared</button></div> */}
 
                     <div><button
                         className="filter-btn"
@@ -143,13 +110,6 @@ export class MailFilter extends React.Component {
                         onClick={this.handleChange}
                     > <img className="filter-icon" src="assets/img/icons/draft.jpg" />draft</button></div>
 
-                    {/* <div><button
-                        className="filter-btn"
-                        id="by-UnRead"
-                        name="isRead"
-                        value={isRead}
-                        onClick={this.handleChange}
-                    > UnRead</button></div> */}
                 </React.Fragment>}
             </form>
         </section>

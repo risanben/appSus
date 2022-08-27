@@ -20,18 +20,8 @@ export class MailCompose extends React.Component {
         })
     }
 
-    // componentWillUnmount() {
-    //     this.unsubscribe()
-    // }
-
-
     loadMail = () => {
-        // if (!this.props.match.params)return<span></span>
         const { body } = this.props.match.params
-
-        // if (!body) return<span></span>
-        //  mailService.getById(mailId).then(mail => this.setState({ mail }))
-
         this.setState((prevState) => ({
             mail: {
                 ...prevState.mail,
@@ -90,7 +80,6 @@ export class MailCompose extends React.Component {
                     value={body} id="body"
                     onChange={this.handleChange}
                 />
-
 
                 <button value={'draft'} name="status" onClick={this.handleChange}>Save</button>
                 <button value={'sent'} name="status" onClick={this.handleChange}>Send</button>

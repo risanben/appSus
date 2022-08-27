@@ -6,18 +6,17 @@ export class MailBooleanFilter extends React.Component {
         },
     }
 
-    componentDidMount() {
-        console.log('MailBooleanFilter- componentDidMount');
-    }
-
     handleChange = ({ target }) => {
         const field = target.name
         let value = true
+        console.log('field', field, 'value', value);
         console.log("field", field);
+        const field2 = field === 'isStared' ? 'isRead' : 'isStared'
         this.setState((prevState) => ({
             filterBy: {
                 ...prevState.filterBy,
-                [field]: value
+                [field]: value,
+                [field2]: false
             }
         }), () => {
             this.props.onSetFilter(this.state.filterBy)
@@ -40,7 +39,7 @@ export class MailBooleanFilter extends React.Component {
                     name="isStared"
                     value={isStared}
                     onClick={this.handleChange}
-                ><img className="filter-icon"  name="isStared" src="assets/img/icons/star3.png" />Stared</button></div>
+                ><img className="filter-icon" name="isStared" src="assets/img/icons/star3.png" />Stared</button></div>
 
                 <div><button
                     className="filter-btn"
@@ -48,7 +47,7 @@ export class MailBooleanFilter extends React.Component {
                     name="isRead"
                     value={isRead}
                     onClick={this.handleChange}
-                > Read/UnRead</button></div>
+                ><img className="filter-icon" name="isRead" src="assets/img/icons/unRead-mail.png" /> UnRead</button></div>
 
             </form>
 

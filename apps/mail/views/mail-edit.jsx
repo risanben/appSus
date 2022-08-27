@@ -2,7 +2,6 @@ import { mailService } from '../services/mail.service.js'
 import { eventBusService } from '../../../services/event-bus.service.js'
 
 export class MailEdit extends React.Component {
-    // unsubscribe
     state = {
         mail: {
             subject: this.props.mail.subject || '',
