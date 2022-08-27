@@ -29,6 +29,7 @@ export class MailApp extends React.Component {
         mailService.query(this.state.filterBy)
             .then(mails => {
                 this.setState({ mails })
+
             })
             .catch(err => {
                 showErrorMsg('No search results were found')
@@ -98,11 +99,12 @@ export class MailApp extends React.Component {
 
     render() {
         const { mails } = this.state
+        const unReadCount = mailService.unReadCounter(mails)
         const len = mails.length
         const { onSetFilter, onRemoveMail, onStaredMail, onFilterChange, onNewMail, onTrashMail, onreadOrUnread } = this
         return <div className="mail-app">
             <MailHeader numOfMailToDisplay={len} onSetFilter={onSetFilter} onNewMail={onNewMail} />
-            <MailFilter onSetFilter={onSetFilter} sideOrUp={'side'} /*onFilterChange={onFilterChange}*/ />
+            <MailFilter onSetFilter={onSetFilter} sideOrUp={'side'} unReadCount={unReadCount} /*onFilterChange={onFilterChange}*/ />
             <MailList mails={mails} onTrashMail={onTrashMail} onStaredMail={onStaredMail} onRemoveMail={onRemoveMail} />
             {/* {this.state.isOpenEditWindow && <MailEdit mail={} />} */}
             {/* <MailBooleanFilter onreadOrUnread={onreadOrUnread} /> */}

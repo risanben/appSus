@@ -13,6 +13,8 @@ export class NoteApp extends React.Component {
     notes: null,
     filterBy: null,
     selectedNote: null,
+    text: '',
+    type: '',
   }
 
   componentDidMount() {
@@ -24,6 +26,7 @@ export class NoteApp extends React.Component {
     NoteService.query(filterBy)
       .then(notes => this.setState({ notes }))
   }
+
 
   onFilterChange = (filterBy) => {
     this.setState({ filterBy }, this.loadNotes)
@@ -70,6 +73,7 @@ export class NoteApp extends React.Component {
       .then(showSuccessMsg('Note was Updated'))
 
   }
+
   render() {
     const { notes, selectedNote } = this.state
     return <section className="note-app">

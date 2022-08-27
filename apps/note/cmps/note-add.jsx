@@ -4,6 +4,18 @@ export class NoteAdd extends React.Component {
         text: '',
     }
 
+    // componentDidMount() {
+    //     this.loadNote()
+    // }
+
+    // loadNote = () => {
+    //     const { text } = this.props.text
+    //     console.log('body', text);
+    //     this.setState(() => ({
+    //         text: text,
+    //         type: 'text',
+    //     }))
+    // }
 
     handleChange = ({ target }) => {
         const text = target.value

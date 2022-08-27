@@ -71,7 +71,7 @@ export class MailFilter extends React.Component {
 
     render() {
         const { subject, status, isRead, isStared } = this.state.filterBy
-        const { sideOrUp } = this.props
+        const { sideOrUp, unReadCount } = this.props
         let sideDisplay = sideOrUp === 'side' ? true : false
         return <section className={sideDisplay ? 'mail-filter' : 'up-filter'}>
             <form onSubmit={this.onFilter}>
@@ -104,12 +104,13 @@ export class MailFilter extends React.Component {
                         > Show all</button></label> */}
 
                     <div> <button
-                        className="filter-btn"
+                        className="filter-btn inbox"
                         id="by-inbox"
                         name="status"
                         value={'inbox'}
                         onClick={this.handleChange}
-                    > <img className="filter-icon" src="assets/img/icons/inbox.png" />Inbox</button></div>
+                    > <img className="filter-icon" src="assets/img/icons/inbox.png" />
+                        Inbox <span className={"unReadCount"}>{unReadCount}</span></button></div>
 
                     <div><button
                         className="filter-btn"

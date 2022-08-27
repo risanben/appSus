@@ -8,6 +8,7 @@ export const mailService = {
     remove,
     update,
     readOrUnread,
+    unReadCounter
 
 }
 
@@ -81,10 +82,18 @@ function query(filterBy) {
     return Promise.resolve(mails)
 }
 
-function readOrUnread( isRead) {
+function unReadCounter(mails) {
+    let counter = 0
+    mails.forEach(mail => {
+        if (mail.status === 'inbox' && !mail.isRead) counter++
+    })
+    return counter
+}
+
+function readOrUnread(isRead) {
     let mails = _loadFromStorage(MAINKEY)
-    console.log('isRead',isRead);
-    console.log('mails',mails);
+    console.log('isRead', isRead);
+    console.log('mails', mails);
 
     if (!mails) return Promise.reject('No search results were found')
     mails = mails.filter(mail => (
