@@ -36,4 +36,11 @@
     align-self: center;
     margin-bottom: 10px;
 }
+
+.mail-details{
+    margin-top: 0;
+    margin-left : 0;
+    display: flex;
+    padding-top: 200px;
+}
 }
