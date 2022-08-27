@@ -2,7 +2,8 @@
     background-color: var(--main-bg-color);
     display: grid;
     grid-template-columns: minmax(200px, 1fr) 10fr;
-    grid-template-rows: 1fr 25fr;
+    /* grid-template-rows: 1fr 5fr 20fr;   */
+    grid-template-rows: 1fr 25fr;   /*ttt*/
     font-family: lato;
     padding-left: 20px;
     padding-right: 20px;

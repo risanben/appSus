@@ -14,7 +14,6 @@ export class NoteCompose extends React.Component {
 
     loadNote = () => {
         const { text } = this.props.match.params
-        console.log('body', text);
         this.setState(() => ({
             text: text,
             type: 'text',

@@ -50,53 +50,56 @@ function query(filterBy) {
         mails = _createMails()
         _saveToStorage(MAINKEY, mails)
     }
+    console.log('mails', mails);
     unReadCounter(mails)
     if (filterBy) {
         let { subject, status, isRead, isStared } = filterBy
-
+        // debugger
         if (isStared) {
             mails = mails.filter(mail => (
                 mail.isStared === isStared
             ))
-        } else if (status) {
+        }//if (isStared) 
+        if (isRead) {
+            mails = mails.filter(mail => (
+                mail.isRead === isRead
+            ))
+            console.log('mails', mails);
+        }//if (isRead)
+        if (status) {
             mails = mails.filter(mail => (
                 mail.status === status
             ))
-            // if (status === 'trash') {
-            //     mails = _loadFromStorage(TRASHKEY)
-            //     if (mails) return Promise.resolve(mails)
-            // }
-        }
-
-        if (mails) {
+        }//if (status)
+        console.log('mails', mails);
+        if (subject) {
             mails = mails.filter(mail => (
                 (mail.subject.includes(subject) ||
                     mail.body.includes(subject))
             ))
+            console.log(mails);
 
-            return Promise.resolve(mails)
-        } else {
-            return Promise.reject('No search results were found')
-        }
+        }//if (subject)
+    }//if (filterBy)
+    if (mails) {
 
+        return Promise.resolve(mails)
+    } else {
+        return Promise.reject('No search results were found')
     }
-    return Promise.resolve(mails)
 }
 
 function unReadCounter(mails) {
     gUnReadCounter = 0
+    if (!mails) return gUnReadCounter
     mails.forEach(mail => {
         if (mail.status === 'inbox' && !mail.isRead) gUnReadCounter++
     })
-    console.log('gUnReadCounter', gUnReadCounter);
-    // return gUnReadCounter
+    return gUnReadCounter
 }
 
 function readOrUnread(isRead) {
     let mails = _loadFromStorage(MAINKEY)
-    console.log('isRead', isRead);
-    console.log('mails', mails);
-
     if (!mails) return Promise.reject('No search results were found')
     mails = mails.filter(mail => (
         mail.isStared === isRead
@@ -126,11 +129,14 @@ function save(mail) {
 }
 
 function _add({ subject, body, date = new Date(), to, status }) {
+    console.log(status);
     let mails = _loadFromStorage(MAINKEY)
     let fDate = formatDate(date)
-    const mail = _createMail(subject, body, date, to, 'user@appsus.com', status, fDate)
+    // console.log(subject,body,date,to,from,fromName,status,fDate);
+    const mail = _createMail(subject, body, date, to, 'user@appsus.com', 'Me', status, fDate)
     mails = [mail, ...mails]
     _saveToStorage(MAINKEY, mails)
+    console.log(mail);
     return Promise.resolve(mail)
 }
 
@@ -149,7 +155,8 @@ function update(mailToUpdate) {
     return Promise.resolve(mailToUpdate)
 }
 
-function _createMail(subject = utilService.makeLorem(3), body = utilService.makeLorem(50), date = dateGen().date, to = getMailAdders(), from = nameGen().from, fromName = nameGen().fromName, status = (from === 'user@appsus.com' ? 'sent' : 'inbox'), fDate = dateGen().fDate) {
+function _createMail(subject = utilService.makeLorem(3), body = utilService.makeLorem(50), date = dateGen().date, to = getMailAdders(), from = nameGen().from, fromName = nameGen().fromName, status = nameGen().status, fDate = dateGen().fDate) {
+    console.log(subject, body, date, to, from, fromName, status, fDate);
     return {
         id: utilService.makeId(),
         subject,
@@ -175,7 +182,6 @@ function _createMails() {
     for (let i = 0; i < 50; i++) {
         mails.push(_createMail())
     }
-    console.log('mails', mails);
     return mails
 }
 
@@ -201,27 +207,25 @@ function nameGen() {
         'George', 'Timothy',
         'Mary', 'Patricia', 'Jennifer', 'Linda', 'Elizabeth', 'Barbara',
         'Susan', 'Jessica', 'Sarah', 'Karen', 'Lisa', 'Nancy', 'Betty', 'Margaret'
-        ,'Sandra', 'Ashley', 'Kimberly', 'Emily', 'Donna', 'Michelle', 'Carol', 'Amanda', 'Dorothy',
+        , 'Sandra', 'Ashley', 'Kimberly', 'Emily', 'Donna', 'Michelle', 'Carol', 'Amanda', 'Dorothy',
         'Melissa', 'Deborah', 'coding academy', 'Yaron Biton', 'Tommy Irmia', 'Alex Yakovlev', 'Elhanan Avihail',
         'Idan Gaz', 'Michael Aharoni', 'Rona Fainshtein'
     ]
-    const fromName = fromNames[utilService.getRandomIntInclusive(0, fromNames.length-1)]
+    const fromName = fromNames[utilService.getRandomIntInclusive(0, fromNames.length - 1)]
     const from = `${fromNames}@appSus.com`
 
     return {
         fromName,
         from,
+        status: 'inbox',
     }
 }
 dateGen()
 function dateGen() {
     const intDate = utilService.getRandomIntInclusive(1640000000000, 1661900000000)
-    console.log(intDate)
     const date = new Date(intDate)
     // const date = new Date(1661900000000)
-    console.log(date)
     const fDate = formatDate(date)
-    console.log(fDate)
     return {
         date,
         fDate,

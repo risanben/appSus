@@ -39,6 +39,7 @@ export class MailApp extends React.Component {
     }
 
     onSetFilter = (filterBy) => {
+        console.log(filterBy);
         this.setState({ filterBy }, this.loadMails)
     }
 
@@ -102,12 +103,12 @@ export class MailApp extends React.Component {
     // ----------------------------------------------
     // onListClick = () => {
     //     isShown = !this.State.showListOrDetails
-        
+
     //     this.setState(() => ({
     //         showListOrDetails: isShown
     //     }))
     // }
-    
+
     // ----------------------------------------------
 
     _onOpenFilters=()=>{
@@ -120,20 +121,19 @@ export class MailApp extends React.Component {
         }
     }
 
-render() {
-    const { mails } = this.state
-    const unReadCount = gUnReadCounter
-    console.log('unReadCount', unReadCount);
-    const len = mails.length
-    const { onSetFilter, onRemoveMail, onStaredMail, onFilterChange, onNewMail, onTrashMail, onreadOrUnread } = this
-    return <div className="mail-app">
-        <MailHeader numOfMailToDisplay={len} onSetFilter={onSetFilter} onNewMail={onNewMail} />
+    render() {
+        const { mails } = this.state
+        // if (!gUnReadCounter) gUnReadCounter = 0
+        const unReadCount = gUnReadCounter
+        const len = mails.length
+        const { onSetFilter, onRemoveMail, onStaredMail, onFilterChange, onNewMail, onTrashMail, onreadOrUnread } = this
+        return <div className="mail-app">
+            <MailHeader numOfMailToDisplay={len} onSetFilter={onSetFilter} onNewMail={onNewMail} />
         <img onClick={this._onOpenFilters}className="mail-burger" src="assets/img/icons/menu-iconn.png" alt="" />
-        <MailFilter onSetFilter={onSetFilter} sideOrUp={'side'} unReadCount={unReadCount} />
-        <MailList mails={mails} onTrashMail={onTrashMail} onStaredMail={onStaredMail} onRemoveMail={onRemoveMail} /* onSetFilter={onSetFilter} sideOrUp={'side'} unReadCount={unReadCount}*/ />
-        {/* <MailDetails/> */}
-        {/* {this.state.isOpenEditWindow && <MailEdit mail={} />} */}
-        {/* <MailBooleanFilter onreadOrUnread={onreadOrUnread} /> */}
-    </div>
-}
+            <MailFilter onSetFilter={onSetFilter} sideOrUp={'side'} unReadCount={unReadCount} />
+            <MailList mails={mails} onTrashMail={onTrashMail} onStaredMail={onStaredMail} onRemoveMail={onRemoveMail} /* onSetFilter={onSetFilter} sideOrUp={'side'} unReadCount={unReadCount}*/ />
+    
+            {/* <MailBooleanFilter onSetFilter={onSetFilter} /> */}
+        </div>
+    }
 }

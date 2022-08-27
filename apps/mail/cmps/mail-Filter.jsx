@@ -1,5 +1,3 @@
-
-
 export class MailFilter extends React.Component {
     state = {
         filterBy: {
@@ -31,7 +29,9 @@ export class MailFilter extends React.Component {
         this.setState((prevState) => ({
             filterBy: {
                 ...prevState.filterBy,
-                [field]: value
+                [field]: value,
+                isRead: false,
+                isStared: false,
             }
         }), () => {
             this.props.onSetFilter(this.state.filterBy)
@@ -118,14 +118,14 @@ export class MailFilter extends React.Component {
                         value={'sent'}
                         onClick={this.handleChange}
                     > <img className="filter-icon" src="assets/img/icons/sent-email.png" />Sent</button></div>
-
+{/* 
                     <div><button
                         className="filter-btn"
                         id="by-star"
                         name="isStared"
                         value={isStared}
                         onClick={this.handleChange}
-                    >{/*⭐*/} <img className="filter-icon" src="assets/img/icons/star3.png" />Stared</button></div>
+                    > <img className="filter-icon" src="assets/img/icons/star3.png" />Stared</button></div> */}
 
                     <div><button
                         className="filter-btn"
@@ -143,13 +143,13 @@ export class MailFilter extends React.Component {
                         onClick={this.handleChange}
                     > <img className="filter-icon" src="assets/img/icons/draft.jpg" />draft</button></div>
 
-                    <div><button
+                    {/* <div><button
                         className="filter-btn"
                         id="by-UnRead"
                         name="isRead"
                         value={isRead}
                         onClick={this.handleChange}
-                    > UnRead</button></div>
+                    > UnRead</button></div> */}
                 </React.Fragment>}
             </form>
         </section>
