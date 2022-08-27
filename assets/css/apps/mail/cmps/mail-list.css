@@ -10,6 +10,24 @@
     height: 40px
 }
 
+/* .mail-list .table-link{
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    justify-content: space-between;
+} */
+
+/* .mail-list .td-from{
+display: flex;
+}
+.mail-list .td-from .fill-the-gap{
+    flex-wrap: 1;
+} */
+
+.mail-list .filter-icon {
+    max-width: 10px;
+    padding-right: 0px;
+}
+
 .mail-list td {
     max-height: 20px;
 }

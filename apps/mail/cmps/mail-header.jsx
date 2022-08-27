@@ -19,8 +19,6 @@ export class MailHeader extends React.Component {
         this.setState(() => ({
             isShown: true
         }))
-
-
     }
 
     onFinishEdit = () => {

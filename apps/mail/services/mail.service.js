@@ -8,7 +8,7 @@ export const mailService = {
     remove,
     update,
     readOrUnread,
-    unReadCounter
+    unReadCounter,
 
 }
 
@@ -42,7 +42,7 @@ const criteria = {
 const MAINKEY = 'mailsDB'
 const TRASHKEY = 'trashDB'
 const DRAFTKEY = 'draftDB'
-
+export var gUnReadCounter
 
 function query(filterBy) {
     let mails = _loadFromStorage(MAINKEY)
@@ -50,6 +50,7 @@ function query(filterBy) {
         mails = _createMails()
         _saveToStorage(MAINKEY, mails)
     }
+    unReadCounter(mails)
     if (filterBy) {
         let { subject, status, isRead, isStared } = filterBy
 
@@ -83,11 +84,12 @@ function query(filterBy) {
 }
 
 function unReadCounter(mails) {
-    let counter = 0
+    gUnReadCounter = 0
     mails.forEach(mail => {
-        if (mail.status === 'inbox' && !mail.isRead) counter++
+        if (mail.status === 'inbox' && !mail.isRead) gUnReadCounter++
     })
-    return counter
+    console.log('gUnReadCounter', gUnReadCounter);
+    // return gUnReadCounter
 }
 
 function readOrUnread(isRead) {
@@ -135,7 +137,8 @@ function _add({ subject, body, date = new Date(), to, status }) {
 function formatDate(date) {
     let monthName = utilService.getMonthName(date).substring(0, 3)
     let dayInMonth = date.getDate()
-    let fDate = `${monthName} ${dayInMonth}`
+    let year = date.getFullYear()
+    let fDate = `${monthName} ${dayInMonth} ${year}`
     return fDate
 }
 
@@ -146,7 +149,7 @@ function update(mailToUpdate) {
     return Promise.resolve(mailToUpdate)
 }
 
-function _createMail(subject = utilService.makeLorem(3), body = utilService.makeLorem(50), date = utilService.getRandomIntInclusive(13), to = getMailAdders(), from = getMailAdders(), status = (from === 'user@appsus.com' ? 'sent' : 'inbox'), fDate) {
+function _createMail(subject = utilService.makeLorem(3), body = utilService.makeLorem(50), date = dateGen().date, to = getMailAdders(), from = nameGen().from, fromName = nameGen().fromName, status = (from === 'user@appsus.com' ? 'sent' : 'inbox'), fDate = dateGen().fDate) {
     return {
         id: utilService.makeId(),
         subject,
@@ -155,6 +158,7 @@ function _createMail(subject = utilService.makeLorem(3), body = utilService.make
         sentAt: date,
         to,
         from,
+        fromName,
         status,
         fDate,
     }
@@ -171,6 +175,7 @@ function _createMails() {
     for (let i = 0; i < 50; i++) {
         mails.push(_createMail())
     }
+    console.log('mails', mails);
     return mails
 }
 
@@ -188,3 +193,38 @@ function _saveToStorage(key, mails) {
 function _loadFromStorage(key) {
     return storageService.loadFromStorage(key)
 }
+
+function nameGen() {
+    const fromNames = ['James', 'John', 'Robert', 'Michael', 'David', 'William',
+        'Richard', 'Joseph', 'Thomas', 'Christopher', 'Charles', 'Daniel', 'Matthew', 'Anthony'
+        , 'Mark', 'Donald', 'Steven', 'Paul', 'Andrew', 'Joshua', 'Kenneth', 'Kevin', 'Brian',
+        'George', 'Timothy',
+        'Mary', 'Patricia', 'Jennifer', 'Linda', 'Elizabeth', 'Barbara',
+        'Susan', 'Jessica', 'Sarah', 'Karen', 'Lisa', 'Nancy', 'Betty', 'Margaret'
+        ,'Sandra', 'Ashley', 'Kimberly', 'Emily', 'Donna', 'Michelle', 'Carol', 'Amanda', 'Dorothy',
+        'Melissa', 'Deborah', 'coding academy', 'Yaron Biton', 'Tommy Irmia', 'Alex Yakovlev', 'Elhanan Avihail',
+        'Idan Gaz', 'Michael Aharoni', 'Rona Fainshtein'
+    ]
+    const fromName = fromNames[utilService.getRandomIntInclusive(0, fromNames.length-1)]
+    const from = `${fromNames}@appSus.com`
+
+    return {
+        fromName,
+        from,
+    }
+}
+dateGen()
+function dateGen() {
+    const intDate = utilService.getRandomIntInclusive(1640000000000, 1661900000000)
+    console.log(intDate)
+    const date = new Date(intDate)
+    // const date = new Date(1661900000000)
+    console.log(date)
+    const fDate = formatDate(date)
+    console.log(fDate)
+    return {
+        date,
+        fDate,
+    }
+}
+

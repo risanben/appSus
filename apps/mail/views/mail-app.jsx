@@ -3,10 +3,11 @@ import { MailList } from '../cmps/mail-list.jsx'
 import { MailFilter } from "../cmps/mail-Filter.jsx"
 import { MailHeader } from "../cmps/mail-header.jsx"
 import { MailEdit } from "./mail-edit.jsx"
-import { mailService } from '../services/mail.service.js'
+import { mailService, gUnReadCounter } from '../services/mail.service.js'
 
 import { showErrorMsg, showSuccessMsg } from '../../../services/event-bus.service.js'
 import { MailBooleanFilter } from '../cmps/mail-Boolean-filter.jsx'
+import { MailDetails } from './mail-details.jsx'
 
 export class MailApp extends React.Component {
     state = {
@@ -17,6 +18,7 @@ export class MailApp extends React.Component {
             isRead: false,
             isStared: false,
             isFiltered: false,
+            // showListOrDetails: false,
         },
         // isOpenEditWindow: false,
     }
@@ -97,17 +99,31 @@ export class MailApp extends React.Component {
         this.setState({ isOpenEditWindow: true })
     }
 
-    render() {
-        const { mails } = this.state
-        const unReadCount = mailService.unReadCounter(mails)
-        const len = mails.length
-        const { onSetFilter, onRemoveMail, onStaredMail, onFilterChange, onNewMail, onTrashMail, onreadOrUnread } = this
-        return <div className="mail-app">
-            <MailHeader numOfMailToDisplay={len} onSetFilter={onSetFilter} onNewMail={onNewMail} />
-            <MailFilter onSetFilter={onSetFilter} sideOrUp={'side'} unReadCount={unReadCount} /*onFilterChange={onFilterChange}*/ />
-            <MailList mails={mails} onTrashMail={onTrashMail} onStaredMail={onStaredMail} onRemoveMail={onRemoveMail} />
-            {/* {this.state.isOpenEditWindow && <MailEdit mail={} />} */}
-            {/* <MailBooleanFilter onreadOrUnread={onreadOrUnread} /> */}
-        </div>
-    }
+    // ----------------------------------------------
+    // onListClick = () => {
+    //     isShown = !this.State.showListOrDetails
+        
+    //     this.setState(() => ({
+    //         showListOrDetails: isShown
+    //     }))
+    // }
+    
+    // ----------------------------------------------
+
+
+render() {
+    const { mails } = this.state
+    const unReadCount = gUnReadCounter
+    console.log('unReadCount', unReadCount);
+    const len = mails.length
+    const { onSetFilter, onRemoveMail, onStaredMail, onFilterChange, onNewMail, onTrashMail, onreadOrUnread } = this
+    return <div className="mail-app">
+        <MailHeader numOfMailToDisplay={len} onSetFilter={onSetFilter} onNewMail={onNewMail} />
+        <MailFilter onSetFilter={onSetFilter} sideOrUp={'side'} unReadCount={unReadCount} />
+        <MailList mails={mails} onTrashMail={onTrashMail} onStaredMail={onStaredMail} onRemoveMail={onRemoveMail} /* onSetFilter={onSetFilter} sideOrUp={'side'} unReadCount={unReadCount}*/ />
+        {/* <MailDetails/> */}
+        {/* {this.state.isOpenEditWindow && <MailEdit mail={} />} */}
+        {/* <MailBooleanFilter onreadOrUnread={onreadOrUnread} /> */}
+    </div>
+}
 }

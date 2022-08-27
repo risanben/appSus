@@ -1,56 +1,72 @@
 import { MailPreview } from '../cmps/mail-preview.jsx'
 import { mailService } from '../services/mail.service.js'
+// import { useHistory } from "react-router-dom";
+// window.location("/mail/list")
 
-const { Link } = ReactRouterDOM
+const { Link, Route, useHistory } = ReactRouterDOM
 
-export function MailList({ mails, onRemoveMail, onStaredMail, onTrashMail }) {
+export class MailList extends React.Component {
 
-  return <section className="mail-list">
-    <table /*border="1"*/>
-      <tbody>
-        {mails.map(mail =>
-          <tr key={mail.id} className={(mail.isRead) ? "read" : "unread"}>
-            <td>
-              <button
-                className={(mail.isStared) ? "stared" : "unStared"}
-                onClick={() => onStaredMail(mail)}
-              >
-                <span className="star">&#9733;</span>
-              </button>
-            </td>
-            {/* <Link to={"/mail/" + mail.id}>
-              <React.Fragment> */}
 
-            <td>
-              <Link to={"/mail/" + mail.id}>{mail.from} </Link>
-            </td>
+  handleClick = (mail) => {
+    // const history = useHistory()
+    console.log(mail);
+    console.log(this.props.history);
+    // <Link to={"/mail/" + mail.id} > </Link>
+    // Route.route("/mail/" + mail.id)
+    // this.props.history.push('/mail/' + mail.id)
+    // history.push('/mail/' + mail.id)
+    // this.route.transitionTo('/mail/' + mail.id)
+    // window.location('/mail/' + mail.id)
+  }
+  render() {
+    const { mails, onRemoveMail, onStaredMail, onTrashMail } = this.props
+    const { handleClick } = this
+    return <section className="mail-list">
+      <table /*border="1"*/>
+        <tbody>
+          {mails.map(mail =>
+            <tr key={mail.id} className={(mail.isRead) ? "read" : "unread"} onClick={() => handleClick(mail)}>
+              {/* // <tr key={mail.id} className={(mail.isRead) ? "read" : "unread"} onClick={() =><Link to={"/mail/" + mail.id} > </Link>}> */}
+              <td>
+                <button
+                  className={(mail.isStared) ? "stared" : "unStared"}
+                  onClick={() => onStaredMail(mail)}
+                >
+                  <span className="star">&#9733;</span>
+                </button>
+              </td>
 
-            <td>
-              <MailPreview
-                key={mail.id}
-                mail={mail} />
-            </td>
-            <td>
-              {mail.fDate}
-            </td>
-            {/* </React.Fragment>
-            </Link> */}
-            <td>
-              {mail.status === 'trash' ?
-                <button onClick={() => onRemoveMail(mail.id)}>Delete forever</button>
-                : <button onClick={() => onTrashMail(mail)}>X</button>}
-            </td>
-            <td>
-              <Link to={`/note/compose/${mail.body}`}>Save as note</Link>
-            </td>
-          </tr>
-        )}
-      </tbody>
-    </table>
-  </section>
+                  {/* <td className="td-from"> 
+                    <Link to={"/mail/" + mail.id}>{mail.fromName} </Link>
+                  </td> */}
+
+                  <td>
+                    <MailPreview
+                      key={mail.id}
+                      mail={mail} />
+                  </td>
+
+                  {/* <td>
+                    {mail.fDate}
+                  </td> */}
+              <td>
+                {mail.status === 'trash' ?
+                  <button onClick={() => onRemoveMail(mail.id)}>Delete forever</button>
+                  : <button onClick={() => onTrashMail(mail)}><img className="filter-icon" src="assets/img/icons/trash.png" /></button>}
+              </td>
+              <td>
+                <Link to={`/note/compose/${mail.body}`}>Save as note</Link>
+              </td>
+            </tr>
+          )}
+        </tbody>
+      </table>
+    </section>
+  }
+
+
 }
-
-
 
 // import { MailPreview } from '../cmps/mail-preview.jsx'
 // import { mailService } from '../services/mail.service.js'

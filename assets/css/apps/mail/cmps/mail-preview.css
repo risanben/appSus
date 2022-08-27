@@ -1,3 +1,10 @@
-/* .mail-preview > * {
-    background-color: var(--unread-bg-color);
-} */
+.mail-preview  {
+   display: flex;
+   justify-content: space-between;
+}
+
+.mail-preview .subject {
+   text-align: left;
+}
+
+
