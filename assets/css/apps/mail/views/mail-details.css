@@ -1,5 +1,12 @@
 .mail-details {
     font-family: lato;
+    margin-top: 60px;
+    margin-left : 60px;
+    padding: 40px 0 40px 20px;
+    /* border: 2px solid red; */
+    background-color: white;
+    border-top-left-radius: 45px;
+    border-bottom-left-radius: 45px;
 }
 
 .mail-details .subject {
@@ -18,4 +25,9 @@
     border-radius: 15px;
     padding: 10px;
     margin: 5px;
+    background-color:lightblue;
+    border: none;
+}
+.mail-details.btn:hover{
+   background-color: rgb(208, 230, 237);
 }
