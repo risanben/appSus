@@ -29,7 +29,7 @@ export class NotePreview extends React.Component {
                 </label>
                 <img src="assets/img/icons/pencil.png" onClick={() => handleNote(note)} title="Edit" className="note-btn" alt="" />
                 <img src="assets/img/icons/pin-icon.png" onClick={() => onPinNote(note.id)} title="Pin" className="note-btn" alt="" />
-                <Link to={`/mail/compose/${note.details.txt}`}>Send as mail</Link>
+                <Link to={`/mail/compose/${note.details.txt}`}> <img className="note-btn" src="assets/img/icons/send-icon.png" title="send as mail" alt="" /></Link>
             </div>
         </section>
     }

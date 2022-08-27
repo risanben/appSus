@@ -6,7 +6,7 @@
 }
 
 .pinned-note-list .note-preview{
-    max-width: 200px;
+    width: 255px;
     display: flex;
     justify-content: center;
 }

@@ -34,6 +34,7 @@ export function AppHeader() {
             <NavLink to="/about"><img title="about" src="assets/img/icons/info.png" className="nav-info-img navimg" alt="" /></NavLink>
             <NavLink to="/mail"><img title="mail" src="assets/img/icons/gmail.png" className="nav-gmail-img navimg" alt="" /></NavLink>
             <NavLink to="/note"><img title="note" src="assets/img/icons/note-icon.png" className="nav-note-img navimg" alt="" /></NavLink>
+            <NavLink to="/note"><img title="book" src="assets/img/icons/books-icon.png" className="nav-note-img navimg" alt="" /></NavLink>
         </nav>
     </header>
 

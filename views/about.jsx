@@ -15,10 +15,10 @@ export function About() {
                     </div>
                 </div>
                 <div className="lorem">
-                    we built the app as our third project in a seious of projects as part of the Coding Academy course.<br />
+                    We built the app as our third project in a seious of projects as part of the Coding Academy course.<br />
                     It is our first big project doing together, which brought a lot of joy throughout the developing stage.<br />
                     We are both hoping the aplication would be useful and easy to operate for all users.<br />
-                    if happen to use our application and would like to send us a review, we would be more than happy to hear
+                    If you happen to use our application and would like to send us a review, we would be more than happy to hear
                 </div>
             </div>
 
