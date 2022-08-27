@@ -111,16 +111,22 @@
    
  
       .app-header nav {
+        /* border: 2px solid red; */
          position: fixed;
          right: 0px;
          top: 75px;
          background-color: var(--selected-filter-bg-color);
          max-height: 0;
-         border-radius: 10px;
+         /* border-radius: 10px; */
          overflow: hidden;
          transition: max-height .5s ease-in, padding-top.45s ease-in, padding-bottom .45s ease-in;
          
      } 
+
+     nav a {
+        margin: 0.9em;
+        /* font-family: lato-bold; */
+    }
 
      .app-header nav.open{
         position: fixed;

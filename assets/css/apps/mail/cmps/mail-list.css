@@ -1,17 +1,26 @@
 .mail-list {
     display: flex;
-    overflow-x:auto
+    overflow-x:auto;
+    /* border: 2px solid green; */
+    /* padding: 5px; */
+    background-color: var(--main-bg-color);
+    border-radius: 15px;
 }
 
 .mail-list table {
     flex-grow: 1;
     border-collapse: collapse;
     table-layout: fixed; 
-    height: 40px
+    height: 40px;
+   
+    
 }
 
 .mail-list td {
     max-height: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
 }
 
 .mail-list td {
@@ -21,15 +30,15 @@
 }
 
 .mail-list tr:hover {
-    background-color: var(--selected-filter-bg-color);
-}
-
-.mail-list .read {
     background-color: var(--read-bg-color);
 }
 
+.mail-list .read {
+    background-color: lightblue;
+}
+
 .mail-list .unread {
-    background-color: var(--unread-bg-color);
+    background-color: var(--selected-filter-bg-color);
 }
 
 .mail-list .unStared {

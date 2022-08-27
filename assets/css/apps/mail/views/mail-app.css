@@ -1,8 +1,10 @@
 .mail-app {
-    background-color: rgb(221, 238, 247);
+    background-color: var(--main-bg-color);
     display: grid;
     grid-template-columns: minmax(200px, 1fr) 10fr;
     grid-template-rows: 1fr 25fr;
+    font-family: lato;
+    
 }
 
 .mail-header {

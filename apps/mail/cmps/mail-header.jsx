@@ -35,7 +35,7 @@ export class MailHeader extends React.Component {
         const { numOfMailToDisplay, onSetFilter, onNewMail } = this.props
         return <header className="mail-header">
             {/* <Link to="/mail/edit"> */}
-            <div onClick={() => setEditDisplay()} className="compose-btn">🖌compose</div>
+            <div onClick={() => setEditDisplay()} className="compose-btn">🖌 compose</div>
             {isShown && <MailEdit mail={mail} onFinishEdit={onFinishEdit} />}
             {/* </Link> */}
             <MailFilter onSetFilter={onSetFilter} sideOrUp={'up'} />

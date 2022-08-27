@@ -75,11 +75,11 @@ export class MailFilter extends React.Component {
         let sideDisplay = sideOrUp === 'side' ? true : false
         return <section className={sideDisplay ? 'mail-filter' : 'up-filter'}>
             <form onSubmit={this.onFilter}>
-                {!sideDisplay && <label htmlFor="by-subject">mail search:
+                {!sideDisplay && <label htmlFor="by-subject">
                     <input
                         className={"by-subject"}
                         type="text"
-                        placeholder="by subject or mail body.."
+                        placeholder=" Search in mails..."
                         id="by-subject"
                         name="subject"
                         value={subject}

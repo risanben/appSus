@@ -122,5 +122,8 @@
         top: 70px;
     }
 
+    .note-add form input{
+        font-size: 20px;
+    }
     
 }

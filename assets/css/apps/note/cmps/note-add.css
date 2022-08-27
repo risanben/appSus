@@ -10,6 +10,7 @@
     width:400px;
     /* background-color: red; */
     border: none;
+    font-size: 17px;
 }
 
 
@@ -42,6 +43,9 @@ input:focus{
 .btn.btn3,
 .btn.btn4{
     width: 15px;
+}
+.btn.btn0{
+    width: 18px;
 }
 
 
