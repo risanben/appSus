@@ -1,0 +1,18 @@
+
+@media (max-width: 600px) {
+
+.mail-header{
+    margin-top: 120px;
+    font-size: 17px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.mail-header .by-subject {
+    margin: 0;
+}
+.mail-count{
+    margin-bottom: 15px;
+}
+
+}

@@ -31,7 +31,7 @@
     border-radius: 50%;
     background-image: url(../../img/tree.jpg);
     background-size: cover;
-    border: 10px solid var(--unread-bg-color);
+    border: 10px solid var(--selected-filter-bg-color);
 }
 
 .about-us{
@@ -58,7 +58,7 @@
     height: 150px;
     width: 150px;
     border-radius: 50%;
-    background-color:var(--unread-bg-color);
+    background-color:var(--selected-filter-bg-color);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -100,7 +100,7 @@
 @media (max-width: 600px) {
 
     .about{
-        padding-top: 10px;
+        padding-top: 100px;
     }
     .about-container{
         flex-direction: column;

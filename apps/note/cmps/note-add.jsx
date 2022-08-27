@@ -4,19 +4,6 @@ export class NoteAdd extends React.Component {
         text: '',
     }
 
-    // componentDidMount() {
-    //     this.loadNote()
-    // }
-
-    // loadNote = () => {
-    //     const { text } = this.props.text
-    //     console.log('body', text);
-    //     this.setState(() => ({
-    //         text: text,
-    //         type: 'text',
-    //     }))
-    // }
-
     handleChange = ({ target }) => {
         const text = target.value
         this.setState({ text })
@@ -100,7 +87,7 @@ export class NoteAdd extends React.Component {
                 {this.state.type === 'todo' && <input type="text" value={this.state.text} onChange={this.handleChange} placeholder="Type title and items separated by comma" />}
                 {this.state.type === 'audio' && <div className="audio-btns-container"><img className="rec-img img1" src="assets/img/icons/record-icon.png" title="record" onClick={this.onRecord} /><img src="assets/img/icons/play.png" title="play" className="rec-img img2" onClick={this.onPlay} /><img src="assets/img/icons/save.png" className="rec-img img3" title="save" onClick={this.onSaveRecording} /></div>}
                 <div className="upload-options-container">
-                    <img onClick={this.onAddVoice} className="btn btn0" title="record" src="assets/img/icons/recorder.png" />
+                    <img onClick={this.onAddVoice} className="btn btn0" title="record" src="assets/img/icons/sound-iconn.png" />
                     <img onClick={this.onAddVid} className="btn btn1" title="video" src="assets/img/icons/video.png" />
                     <img onClick={this.onAddImg} className="btn btn2" title="photo" src="assets/img/icons/picture.png" />
                     <img onClick={this.onAddTodo} className="btn btn3" title="todo" src="assets/img/icons/checklist.png" />

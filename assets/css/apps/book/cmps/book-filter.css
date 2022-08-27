@@ -1,0 +1,9 @@
+.book-filter form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.book-filter form > input {
+    margin-bottom: 10px;
+}
