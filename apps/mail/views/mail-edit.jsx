@@ -72,7 +72,7 @@ export class MailEdit extends React.Component {
         const { subject, body, to } = this.state.mail
         return <section className="mail-edit">
             <header className="header">
-                <button className="btn" onClick={() => this.props.onFinishEdit()}>X</button>
+                <button className="close-btn" onClick={() => this.props.onFinishEdit()}>X</button>
             </header>
             <form className="flex column align-center" onSubmit={this.onSaveMail}>
 
@@ -93,16 +93,16 @@ export class MailEdit extends React.Component {
                 />
 
                 {/* <label htmlFor="body">body</label> */}
-                <input type="text" name="body"
+                <textarea type="text" name="body"
                     className="txt body"
                     value={body} id="body"
                     onChange={this.handleChange}
                 />
-
-
-
-                {/* <button value={'draft'} name="status" onClick={this.handleChange}>Save</button> */}
-                <button value={'sent'} name="status" onClick={this.handleChange}>Send</button>
+                <div className="btn-container">
+                    <button className="btn-send" value={'sent'} name="status" onClick={this.handleChange}>Send</button>
+                    <button className="btn-save" value={'draft'} name="status" onClick={this.handleChange}><img src="assets/img/icons/save-icon.png" /></button>
+                    {/* <img className="btn-save" value={'draft'} name="status" onClick={this.handleChange} src="assets/img/icons/save-icon.png" /> */}
+                </div>
             </form>
         </section>
     }

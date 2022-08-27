@@ -36,9 +36,12 @@ export function MailList({ mails, onRemoveMail, onStaredMail, onTrashMail }) {
             {/* </React.Fragment>
             </Link> */}
             <td>
-              {mail.status==='trash'?
-               <button onClick={() => onRemoveMail(mail.id)}>Delete forever</button>
-              :<button onClick={() => onTrashMail(mail)}>X</button>}
+              {mail.status === 'trash' ?
+                <button onClick={() => onRemoveMail(mail.id)}>Delete forever</button>
+                : <button onClick={() => onTrashMail(mail)}>X</button>}
+            </td>
+            <td>
+              <Link to={`/note/compose/${mail.body}`}>Save as note</Link>
             </td>
           </tr>
         )}

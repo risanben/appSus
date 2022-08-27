@@ -58,7 +58,7 @@ export class MailCompose extends React.Component {
         console.log(ev);
         mailService.save(this.state.mail)
             .then(() => {
-                this.props.history.push('/mail')
+                this.props.history.push('/note')
                 // this.props.onFinishEdit()
             })
     }
@@ -93,7 +93,7 @@ export class MailCompose extends React.Component {
                 />
 
 
-                {/* <button value={'draft'} name="status" onClick={this.handleChange}>Save</button> */}
+                <button value={'draft'} name="status" onClick={this.handleChange}>Save</button>
                 <button value={'sent'} name="status" onClick={this.handleChange}>Send</button>
             </form>
         </section>

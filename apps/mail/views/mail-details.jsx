@@ -59,17 +59,19 @@ export class MailDetails extends React.Component {
         if (!mail) return <div>Loading...</div>
 
         return <section className="mail-details">
-            <h3>{mail.from}</h3>
+            <h1>{mail.subject}</h1>
             <h3>.</h3>
-            <h3>{mail.subject}</h3>
+            <h3>{mail.from}</h3>
             {<hr></hr>}
             <h3>{mail.body}</h3>
-            <button onClick={onGoBack}>Back</button>
-            {/* <Link to={`/mail/edit/${mail.id}`}>Edit</Link> */}
-            <div onClick={() => setEditDisplay()}>Edit</div>
-            {isShown && <MailEdit mail={mail} onFinishEdit={onFinishEdit} />}
-            <button onClick={onMailToNote}>mail to note</button>
 
+            <div className="btn-container">
+                <button className="mail-details btn" onClick={onGoBack}>Back</button>
+                {/* <Link to={`/mail/edit/${mail.id}`}>Edit</Link> */}
+                <div className="mail-details btn" onClick={() => setEditDisplay()}>Edit</div>
+                {isShown && <MailEdit mail={mail} onFinishEdit={onFinishEdit} />}
+                <Link className="mail-details btn" to={`/note/compose/${mail.body}`}>Save as note</Link>
+            </div>
         </section>
     }
 }

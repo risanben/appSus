@@ -19,7 +19,7 @@
     width: 25em;
 }
 
-.mail-header div {
+.mail-header .compose-btn {
     font-family: lato;
     padding: 10px 5px;
     border-radius: 15px;
