@@ -75,14 +75,15 @@ export class MailCompose extends React.Component {
                     onChange={this.handleChange}
                 />
 
-                <input type="text" name="body"
+                <textarea type="text" name="body"
                     className="txt body"
                     value={body} id="body"
                     onChange={this.handleChange}
                 />
-
-                <button value={'draft'} name="status" onClick={this.handleChange}>Save</button>
-                <button value={'sent'} name="status" onClick={this.handleChange}>Send</button>
+                <div className="btn-container">
+                    <button className="btn-send" value={'sent'} name="status" onClick={this.handleChange}>Send</button>
+                    <button className="btn-save" value={'draft'} name="status" onClick={this.handleChange}>Save</button>
+                </div>
             </form>
         </section>
     }

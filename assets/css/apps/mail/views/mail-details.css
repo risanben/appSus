@@ -1,13 +1,21 @@
-.mail-details .btn-container{
-display: flex;
+.mail-details {
+    font-family: lato;
+}
+
+.mail-details .subject {
+    font-family: lato-bold;
+}
+
+.mail-details .btn-container {
+    display: flex;
     position: absolute;
     bottom: 0;
     left: 0;
     margin: 10px;
 }
 
-.mail-details.btn{
- border-radius: 15px;
- padding: 10px;
- margin: 5px;
+.mail-details.btn {
+    border-radius: 15px;
+    padding: 10px;
+    margin: 5px;
 }

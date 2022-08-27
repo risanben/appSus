@@ -59,11 +59,11 @@ export class MailDetails extends React.Component {
         if (!mail) return <div>Loading...</div>
 
         return <section className="mail-details">
-            <h1>{mail.subject}</h1>
+            <h1 className="subject">{mail.subject}</h1>
             <h3>.</h3>
-            <h3>{mail.from}</h3>
+            <h4 className="from">{mail.from}</h4>
             {<hr></hr>}
-            <h3>{mail.body}</h3>
+            <h3 className="body">{mail.body}</h3>
 
             <div className="btn-container">
                 <button className="mail-details btn" onClick={onGoBack}>Back</button>

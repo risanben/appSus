@@ -1,5 +1,4 @@
 import { mailService } from '../services/mail.service.js'
-import { eventBusService } from '../../../services/event-bus.service.js'
 
 export class MailEdit extends React.Component {
     state = {
@@ -12,35 +11,10 @@ export class MailEdit extends React.Component {
 
     }
 
-    componentDidMount() {
-        // this.loadMail()
-        // this.unsubscribe = eventBusService.on('send-mail', (mail) => {
-        //     this.setState({ mail })
-        // })
-    }
-
-    // componentWillUnmount() {
-    //     this.unsubscribe()
-    // }
-
-    // ------------------------------------------------------------
-    loadMail = () => {
-        const { mailId } = this.props.match.params
-        if (!mailId) return
-        mailService.getById(mailId).then(mail => this.setState({ mail }))
-    }
-    // ------------------------------------------------------------
-
     handleChange = ({ target }) => {
         const field = target.name
         const value = target.value
         console.log(target);
-        // let value = ''
-        // if (field === 'to') {
-        //     value = isValidEmail(email) ? target.value : alert('Please enter valid email')
-        // } else {
-        //     value = target.value
-        // }
         this.setState((prevState) => ({
             mail: {
                 ...prevState.mail,
@@ -59,14 +33,6 @@ export class MailEdit extends React.Component {
             })
     }
 
-    // isValidEmail(email) {
-    //     return /\S+@\S+\.\S+/.test(email)
-    // }
-
-    // onGoBack = () => {
-    //     this.props.history.push('/mail')
-    // }
-
     render() {
         const { subject, body, to } = this.state.mail
         return <section className="mail-edit">
@@ -75,7 +41,6 @@ export class MailEdit extends React.Component {
             </header>
             <form className="flex column align-center" onSubmit={this.onSaveMail}>
 
-                {/* <label htmlFor="to">to</label> */}
                 <input type="mail" name="to"
                     className="txt to"
                     value={to} id="to"
@@ -83,7 +48,6 @@ export class MailEdit extends React.Component {
                     onChange={this.handleChange}
                 />
 
-                {/* <label htmlFor="subject">subject</label> */}
                 <input type="text" name="subject"
                     className="txt subject"
                     value={subject} id="subject"
@@ -91,7 +55,6 @@ export class MailEdit extends React.Component {
                     onChange={this.handleChange}
                 />
 
-                {/* <label htmlFor="body">body</label> */}
                 <textarea type="text" name="body"
                     className="txt body"
                     value={body} id="body"
