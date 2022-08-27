@@ -86,7 +86,6 @@ export class MailFilter extends React.Component {
                         onChange={this.handleChange}
                     /></label>}
                 {sideDisplay && <React.Fragment>
-
                     <div> <button
                         className="filter-btn"
                         id="by-clean-filter"
@@ -153,8 +152,6 @@ export class MailFilter extends React.Component {
                     > UnRead</button></div>
                 </React.Fragment>}
             </form>
-
-
         </section>
     }
 }

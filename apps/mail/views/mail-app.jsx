@@ -110,6 +110,15 @@ export class MailApp extends React.Component {
     
     // ----------------------------------------------
 
+    _onOpenFilters=()=>{
+        const elFilters = document.querySelector('.mail-filter')
+        console.log('elFilters:', elFilters)
+        if (elFilters.classList.contains("visible")){
+            elFilters.classList.remove("visible")
+        } else{
+            elFilters.classList.add("visible")
+        }
+    }
 
 render() {
     const { mails } = this.state
@@ -119,6 +128,7 @@ render() {
     const { onSetFilter, onRemoveMail, onStaredMail, onFilterChange, onNewMail, onTrashMail, onreadOrUnread } = this
     return <div className="mail-app">
         <MailHeader numOfMailToDisplay={len} onSetFilter={onSetFilter} onNewMail={onNewMail} />
+        <img onClick={this._onOpenFilters}className="mail-burger" src="assets/img/icons/menu-iconn.png" alt="" />
         <MailFilter onSetFilter={onSetFilter} sideOrUp={'side'} unReadCount={unReadCount} />
         <MailList mails={mails} onTrashMail={onTrashMail} onStaredMail={onStaredMail} onRemoveMail={onRemoveMail} /* onSetFilter={onSetFilter} sideOrUp={'side'} unReadCount={unReadCount}*/ />
         {/* <MailDetails/> */}

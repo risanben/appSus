@@ -56,7 +56,7 @@ export class MailList extends React.Component {
                   : <button onClick={() => onTrashMail(mail)}><img className="filter-icon" src="assets/img/icons/trash.png" /></button>}
               </td>
               <td>
-                <Link to={`/note/compose/${mail.body}`}>Save as note</Link>
+                <Link to={`/note/compose/${mail.body}`}>Save As Note</Link>
               </td>
             </tr>
           )}

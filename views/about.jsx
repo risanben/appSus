@@ -26,10 +26,10 @@ export function About() {
         </div>
         <footer>
             <div className="footer-container">
-                <div><img src="../assets/img/icons/letter.png"/><span><h4>contact</h4><br /></span></div>
-                <div><img src="../assets/img/icons/plus.png"/><span><h4>follow</h4></span><br /></div>
-                <div><img src="../assets/img/icons/phone.png"/><span><h4>call</h4></span></div>
-                <div><img src="../assets/img/icons/coppyright.png"/><span><h4>coffeeright</h4></span></div>
+                <div><img src="assets/img/icons/letter.png"/><span><h4>contact</h4><br /></span></div>
+                <div><img src="assets/img/icons/plus.png"/><span><h4>follow</h4></span><br /></div>
+                <div><img src="assets/img/icons/phone.png"/><span><h4>call</h4></span></div>
+                <div><img src="assets/img/icons/coppyright.png"/><span><h4>coffeeright</h4></span></div>
             </div>
         </footer>
 

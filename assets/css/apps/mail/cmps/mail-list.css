@@ -48,11 +48,12 @@ display: flex;
 }
 
 .mail-list tr:hover {
-    background-color: var(--read-bg-color);
+    background-color: lightblue;
 }
 
+
 .mail-list .read {
-    background-color: lightblue;
+    background-color:  var(--read-bg-color);
 }
 
 .mail-list .unread {

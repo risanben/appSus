@@ -58,12 +58,13 @@
 }
 
 .mail-edit .btn-container .btn-send {
-    background-color: rgb(35, 129, 236);
+    background-color: var(--unread-bg-color);
     border-radius: 30px;
     padding: 15px;
     margin: 10px;
     width: 8em;
     cursor: pointer;
+    border: none;
 }
 
 .mail-edit .btn-container .btn-save {

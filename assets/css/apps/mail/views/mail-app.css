@@ -4,7 +4,8 @@
     grid-template-columns: minmax(200px, 1fr) 10fr;
     grid-template-rows: 1fr 25fr;
     font-family: lato;
-    
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .mail-header {

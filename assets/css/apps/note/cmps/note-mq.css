@@ -43,11 +43,16 @@
     .pinned-note-list {
         gap: 10px;
         display: block;
-        /* width: 100%; */
+    }
+
+    .note-btns-container{
+        padding-top: 15px;
+        padding-bottom: 10px;
     }
 
     .note-preview{
         display: block;
+        /* border: 2px solid red; */
     }
 
     .note-edit{
@@ -59,7 +64,7 @@
     }
 
     .note-preview{
-        padding: 5px;
+        padding: 10px;
     }
 
     .note-filter .filter-btn{
