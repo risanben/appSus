@@ -35,7 +35,7 @@ export class MailEdit extends React.Component {
     handleChange = ({ target }) => {
         const field = target.name
         const value = target.value
-        console.log('field', field, 'value', value);
+        console.log(target);
         // let value = ''
         // if (field === 'to') {
         //     value = isValidEmail(email) ? target.value : alert('Please enter valid email')
@@ -52,10 +52,10 @@ export class MailEdit extends React.Component {
 
     onSaveMail = (ev) => {
         ev.preventDefault()
-        console.log(ev);
         mailService.save(this.state.mail)
             .then(() => {
                 // this.props.history.push('/mail')
+                console.log(this.state.mail);
                 this.props.onFinishEdit()
             })
     }
@@ -100,7 +100,7 @@ export class MailEdit extends React.Component {
                 />
                 <div className="btn-container">
                     <button className="btn-send" value={'sent'} name="status" onClick={this.handleChange}>Send</button>
-                    <button className="btn-save" value={'draft'} name="status" onClick={this.handleChange}><img src="assets/img/icons/save-icon.png" /></button>
+                    <button className="btn-save" value={'draft'} name="status" onClick={this.handleChange}>Save</button>
                     {/* <img className="btn-save" value={'draft'} name="status" onClick={this.handleChange} src="assets/img/icons/save-icon.png" /> */}
                 </div>
             </form>

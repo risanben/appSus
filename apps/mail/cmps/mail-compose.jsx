@@ -28,7 +28,7 @@ export class MailCompose extends React.Component {
     loadMail = () => {
         // if (!this.props.match.params)return<span></span>
         const { body } = this.props.match.params
-        console.log('body', body);
+
         // if (!body) return<span></span>
         //  mailService.getById(mailId).then(mail => this.setState({ mail }))
 
@@ -55,7 +55,6 @@ export class MailCompose extends React.Component {
 
     onSaveMail = (ev) => {
         ev.preventDefault()
-        console.log(ev);
         mailService.save(this.state.mail)
             .then(() => {
                 this.props.history.push('/note')

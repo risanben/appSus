@@ -1,58 +1,59 @@
  /* שמתי למעלה כי אני חושש שההגדרות מהבוקס ישפיעו על השאר */
-@import './apps/book/cmps/book-details.css';
-@import './apps/book/cmps/book-edit.css';
-@import './apps/book/cmps/book-filter.css';
-@import './apps/book/cmps/book-list.css';
-@import './apps/book/cmps/book-preview.css';
-@import './apps/book/cmps/review-add.css';
-@import './apps/book/cmps/layout.css';
-@import './apps/book/cmps/book-app.css';
+ @import './apps/book/cmps/book-details.css';
+ @import './apps/book/cmps/book-edit.css';
+ @import './apps/book/cmps/book-filter.css';
+ @import './apps/book/cmps/book-list.css';
+ @import './apps/book/cmps/book-preview.css';
+ @import './apps/book/cmps/review-add.css';
+ @import './apps/book/cmps/layout.css';
+ @import './apps/book/cmps/book-app.css';
 
 
-/* Setup */
+ /* Setup */
 
-@import './setup/variables.css';
-@import './setup/fonts.css';
+ @import './setup/variables.css';
+ @import './setup/fonts.css';
 
-/* Basics */
+ /* Basics */
 
-@import './basics/base.css';
-@import './basics/helpers.css';
-@import './basics/layout.css';
+ @import './basics/base.css';
+ @import './basics/helpers.css';
+ @import './basics/layout.css';
 
-/* Views */
-@import './views/home.css';
-@import './views/about.css';
+ /* Views */
+ @import './views/home.css';
+ @import './views/about.css';
 
-/* Cmps */
-@import './cmps/user-msg.css';
-@import './cmps/app-header.css';
+ /* Cmps */
+ @import './cmps/user-msg.css';
+ @import './cmps/app-header.css';
 
-/*Apps*/
-/*Mail*/
-/* Views */
-@import './apps/mail/views/mail-app.css';
-@import './apps/mail/views/mail-edit.css';
-@import './apps/mail/views/mail-details.css';
+ /*Apps*/
+ /*Mail*/
+ /* Views */
+ @import './apps/mail/views/mail-app.css';
+ @import './apps/mail/views/mail-edit.css';
+ @import './apps/mail/views/mail-details.css';
 
-/*Cmps*/
-@import './apps/mail/cmps/mail-list.css';
-@import './apps/mail/cmps/mail-preview.css';
-@import './apps/mail/cmps/mail-filter.css';
-@import './apps/mail/cmps/mail-header.css';
-@import './apps/mail/cmps/mail-mq.css';
+ /*Cmps*/
+ @import './apps/mail/cmps/mail-list.css';
+ @import './apps/mail/cmps/mail-preview.css';
+ @import './apps/mail/cmps/mail-filter.css';
+ @import './apps/mail/cmps/mail-header.css';
+ @import './apps/mail/cmps/mail-mq.css';
+ @import './apps/mail/cmps/mail-boolean-filter.css';
 
 
-/* NOTE */
-/* Views */
-@import './apps/note/views/note-app.css';
-@import './apps/note/views/note-app.css';
+ /* NOTE */
+ /* Views */
+ @import './apps/note/views/note-app.css';
+ @import './apps/note/views/note-app.css';
 
-/*Cmps*/
-@import './apps/note/cmps/note-preview.css';
-@import './apps/note/cmps/note-list.css';
-@import './apps/note/cmps/note-filter.css';
-@import './apps/note/cmps/note-add.css';
-@import './apps/note/cmps/note-edit.css';
-@import './apps/note/cmps/pinned-note-list.css';
-@import './apps/note/cmps/note-mq.css';
+ /*Cmps*/
+ @import './apps/note/cmps/note-preview.css';
+ @import './apps/note/cmps/note-list.css';
+ @import './apps/note/cmps/note-filter.css';
+ @import './apps/note/cmps/note-add.css';
+ @import './apps/note/cmps/note-edit.css';
+ @import './apps/note/cmps/pinned-note-list.css';
+ @import './apps/note/cmps/note-mq.css';

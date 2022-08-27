@@ -10,8 +10,8 @@ export class MailList extends React.Component {
 
   handleClick = (mail) => {
     // const history = useHistory()
-    console.log(mail);
-    console.log(this.props.history);
+  
+   
     // <Link to={"/mail/" + mail.id} > </Link>
     // Route.route("/mail/" + mail.id)
     // this.props.history.push('/mail/' + mail.id)
@@ -32,6 +32,7 @@ export class MailList extends React.Component {
                 <button
                   className={(mail.isStared) ? "stared" : "unStared"}
                   onClick={() => onStaredMail(mail)}
+                  title={'Mark as stared email'}
                 >
                   <span className="star">&#9733;</span>
                 </button>
@@ -52,11 +53,11 @@ export class MailList extends React.Component {
                   </td> */}
               <td>
                 {mail.status === 'trash' ?
-                  <button onClick={() => onRemoveMail(mail.id)}>Delete forever</button>
-                  : <button onClick={() => onTrashMail(mail)}><img className="filter-icon" src="assets/img/icons/trash.png" /></button>}
+                  <button onClick={() => onRemoveMail(mail.id)} title={'Delete forever'}>Delete forever</button>
+                  : <button onClick={() => onTrashMail(mail)}><img className="filter-icon" src="assets/img/icons/trash.png" title={'Move to trash'} /></button>}
               </td>
               <td>
-                <Link to={`/note/compose/${mail.body}`}>Save as note</Link>
+                <Link to={`/note/compose/${mail.body}`} title={'Save as note'}>Note </Link>
               </td>
             </tr>
           )}

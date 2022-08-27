@@ -54,7 +54,6 @@ export class NoteApp extends React.Component {
   onPinNote = (id) => {
     NoteService.togglePin(id)
       .then(this.loadNotes())
-    console.log('pin was toggled:')
   }
 
   onColorChange = (id, color) => {

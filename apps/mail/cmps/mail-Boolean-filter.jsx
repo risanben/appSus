@@ -12,36 +12,36 @@ export class MailBooleanFilter extends React.Component {
 
     handleChange = ({ target }) => {
         const field = target.name
-        let value = target.value === 'true' ? false : true
-
+        let value = true
+        console.log("field", field);
         this.setState((prevState) => ({
             filterBy: {
                 ...prevState.filterBy,
                 [field]: value
             }
         }), () => {
-            this.props.onreadOrUnread(this.state.filterBy)
+            this.props.onSetFilter(this.state.filterBy)
         })
     }
 
     onFilter = (ev) => {
         ev.preventDefault()
-        this.props.onreadOrUnread(this.state.filterBy)
+        this.props.onSetFilter(this.state.filterBy)
     }
 
     render() {
         const { isRead, isStared } = this.state.filterBy
         return <section className={'mail-boolean-filter'}>
             <form onSubmit={this.onFilter}>
-                {/*
+
                 <div><button
                     className="filter-btn"
                     id="by-star"
                     name="isStared"
                     value={isStared}
                     onClick={this.handleChange}
-                ><img className="filter-icon" src="assets/img/icons/star3.png" />Stared</button></div>
-            */}
+                ><img className="filter-icon"  name="isStared" src="assets/img/icons/star3.png" />Stared</button></div>
+
                 <div><button
                     className="filter-btn"
                     id="by-UnRead"

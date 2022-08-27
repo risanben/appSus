@@ -1,17 +1,17 @@
-.mail-filter {
+.mail-boolean-filter {
     display: flex;
     flex-direction: column;
-    /* grid-column: 1/2; */
-    /* grid-row:3/4;   */
+    grid-column: 1/2;
+    /* grid-row: 2/3; */
     background-color: var(--main-bg-color);
 }
 
-.mail-filter button {
+.mail-boolean-filter button {
     display: block;
     font-size: 17px;
 }
 
-.mail-filter div {
+.mail-boolean-filter div {
     font-family: lato;
     /* padding: 15px 2px; */
     border-top-right-radius: 30px;
@@ -20,34 +20,33 @@
     /* background-color: green; */
 }
 
-.mail-filter div:hover {
+.mail-boolean-filter div:hover {
     background-color: var(--selected-filter-bg-color);
 }
 
-.mail-filter .active {
+.mail-boolean-filter .active {
     background-color: var(--selected-filter-bg-color);
     border: 1px solid rgba(0, 0, 0, 0.377);
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
 }
 
-.mail-filter .filter-btn {
+.mail-boolean-filter .filter-btn {
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
-    
 }
 
-.mail-filter .filter-icon {
+.mail-boolean-filter .filter-icon {
     max-width: 15px;
     padding-right: 10px;
 }
 
-/* .mail-filter .by-subject {
+/* .mail-boolean-filter .by-subject {
     border-radius: 5px;
 } */
 
 /* ///////////////////////////////////////////////////////////////// */
-.mail-filter button {
+.mail-boolean-filter button {
     font-family: lato;
     padding: 15px 2px;
     border-top-right-radius: 30px;
@@ -56,26 +55,25 @@
     background-color: var(--main-bg-color);
 }
 
-.mail-filter button:hover {
+.mail-boolean-filter button:hover {
     background-color: var(--selected-filter-bg-color);
 }
 
-.mail-filter button:active {
+.mail-boolean-filter button:active {
     background-color: var(--selected-filter-bg-color);
     border: 1px solid rgba(0, 0, 0, 0.377);
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
 }
 
-.mail-filter button {
+.mail-boolean-filter button {
     width: 100%;
     height: 100%;
     border: none;
     /* background-opacity: 0.1; */
 }
 
-.mail-filter .filter-btn.inbox .unReadCount {
-
+.mail-boolean-filter .filter-btn.inbox .unReadCount {
     float: right;
     margin-right: 30px;
 }
