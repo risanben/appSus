@@ -12,7 +12,7 @@ export class MailList extends React.Component {
       <table>
         <tbody>
           {mails.map(mail =>
-            <tr key={mail.id} className={(mail.isRead) ? "read" : "unread"} onClick={() => handleClick(mail)}>
+            <tr key={mail.id} className={(mail.isRead) ? "read" : "unread"} /*onClick={() => handleClick(mail)}*/>
               <td>
                 <button
                   className={(mail.isStared) ? "stared" : "unStared"}
